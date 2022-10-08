@@ -32,103 +32,77 @@ end
 
 go
 
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'usp_modificar')
-DROP PROCEDURE usp_modificar
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'curso_modificar')
+DROP PROCEDURE curso_modificar
 
 go
 
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'usp_obtener')
-DROP PROCEDURE usp_obtener
-
-go
-
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'usp_listar')
-DROP PROCEDURE usp_obtener
-
-go
-
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'usp_eliminar')
-DROP PROCEDURE usp_eliminar
-
-go
-
---************************ PROCEDIMIENTOS PARA CREAR ************************--
-create procedure usp_registrar(
-@documentoidentidad varchar(60),
-@nombres varchar(60),
-@telefono varchar(60),
-@correo varchar(60),
-@ciudad varchar(60)
+create procedure curso_modificar(
+@idcurso int,
+@nombre varchar(60),
+@nombre_prerrequisito varchar(60),
+@numero_creditos int,
+@cupos_disponibles int,
+@idmaestro int
 )
 as
 begin
 
-insert into USUARIO(DocumentoIdentidad,Nombres,Telefono,Correo,Ciudad)
-values
-(
-@documentoidentidad,
-@nombres,
-@telefono,
-@correo,
-@ciudad
-)
+UPDATE CURSO SET
+Nombre = @nombre,
+NombrePrerrequisito = @nombre_prerrequisito,
+NumeroCreditos = @numero_creditos,
+CuposDisponibles = @cupos_disponibles,
+IdMaestro = @idmaestro
+WHERE IdCurso = @idcurso
 
 end
 
+go
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'curso_listar')
+DROP PROCEDURE curso_listar
 
 go
 
-create procedure usp_modificar(
-@idusuario int,
-@documentoidentidad varchar(60),
-@nombres varchar(60),
-@telefono varchar(60),
-@correo varchar(60),
-@ciudad varchar(60)
-)
+create procedure curso_listar
 as
 begin
 
-update USUARIO set 
-DocumentoIdentidad = @documentoidentidad,
-Nombres = @nombres,
-Telefono = @telefono,
-Correo = @correo,
-Ciudad = @ciudad
-where IdUsuario = @idusuario
+select * from curso
 
 end
 
 go
 
-create procedure usp_obtener(@idusuario int)
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'curso_obtener')
+DROP PROCEDURE curso_obtener
+
+go
+
+create procedure curso_obtener(@idcurso int)
 as
 begin
 
-select * from usuario where IdUsuario = @idusuario
+select * from curso where IdCurso = @idcurso
 end
 
 go
-create procedure usp_listar
-as
-begin
 
-select * from usuario
-end
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'curso_eliminar')
+DROP PROCEDURE curso_eliminar
 
 go
 
-go
-
-create procedure usp_eliminar(
-@idusuario int
+create procedure curso_eliminar(
+@idcurso int
 )
 as
 begin
 
-delete from usuario where IdUsuario = @idusuario
+delete from curso where IdCurso = @idcurso
 
 end
 
 go
+
