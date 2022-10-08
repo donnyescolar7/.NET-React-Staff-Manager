@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "kBd2dm2/wt33OC4m7T1oNo3smPjBKQnWuRfWy77Mm0E=",
+  "Source": "API_SOPHOS",
+  "BasePath": "_content/API_SOPHOS",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

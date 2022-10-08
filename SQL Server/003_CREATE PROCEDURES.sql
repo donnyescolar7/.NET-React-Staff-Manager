@@ -1,10 +1,34 @@
 go
 use DBPRUEBAS
 go
---************************ VALIDAMOS SI EXISTE EL PROCEDIMIENTO ************************--
+--************************ PROCEDIMIENTOS ************************--
 
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'usp_registrar')
-DROP PROCEDURE usp_registrar
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'curso_crear')
+DROP PROCEDURE curso_crear
+
+go
+
+create procedure curso_crear(
+@nombre varchar(60),
+@nombre_prerrequisito varchar(60),
+@numero_creditos int,
+@cupos_disponibles int,
+@idmaestro int
+)
+as
+begin
+
+insert into CURSO(Nombre,NombrePrerrequisito,NumeroCreditos,CuposDisponibles,IdMaestro)
+values
+(
+@nombre,
+@nombre_prerrequisito,
+@numero_creditos,
+@cupos_disponibles,
+@idmaestro
+)
+
+end
 
 go
 
