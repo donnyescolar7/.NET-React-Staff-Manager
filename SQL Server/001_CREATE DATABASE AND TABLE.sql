@@ -38,7 +38,6 @@ IdMaestro int primary key identity(1,1),
 Nombre varchar(60),
 Titulo varchar(60),
 Experiencia int,
-CantidadCreditos varchar(60),
 )
 
 GO

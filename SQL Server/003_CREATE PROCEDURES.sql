@@ -203,3 +203,100 @@ end
 
 go
 
+--************************ PROCEDIMIENTOS MAESTRO************************--
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'maestro_crear')
+DROP PROCEDURE maestro_crear
+
+go
+
+create procedure maestro_crear(
+@nombre varchar(60),
+@titulo varchar(60),
+@experiencia int
+)
+as
+begin
+
+insert into MAESTRO(Nombre, Titulo, Experiencia)
+values
+(
+@nombre,
+@titulo,
+@experiencia
+)
+
+end
+
+go
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'maestro_modificar')
+DROP PROCEDURE maestro_modificar
+
+go
+
+create procedure maestro_modificar(
+@idmaestro int,
+@nombre varchar(60),
+@titulo varchar(60),
+@experiencia int
+)
+as
+begin
+
+UPDATE MAESTRO SET
+Nombre = @nombre,
+Titulo = @titulo,
+Experiencia = @experiencia
+WHERE IdMaestro = @idmaestro
+
+end
+
+go
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'maestro_listar')
+DROP PROCEDURE maestro_listar
+
+go
+
+create procedure maestro_listar
+as
+begin
+
+select * from maestro
+
+end
+
+go
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'maestro_obtener')
+DROP PROCEDURE maestro_obtener
+
+go
+
+create procedure maestro_obtener(@idmaestro int)
+as
+begin
+
+select * from maestro where IdMaestro = @idmaestro
+end
+
+go
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'maestro_eliminar')
+DROP PROCEDURE maestro_eliminar
+
+go
+
+create procedure maestro_eliminar(
+@idmaestro int
+)
+as
+begin
+
+delete from maestro where IdMaestro = @idmaestro
+
+end
+
+go
+
