@@ -14,7 +14,6 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from "react-router-dom";
 
-const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = () => {
@@ -128,12 +127,12 @@ const ResponsiveAppBar = () => {
               Home
             </Button>
             <Button
-              component={Link} to="/about"
-              key="Home2"
+              component={Link} to="/cursos"
+              key="Cursos"
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-              Home222
+              Cursos
             </Button>
             <Button
               component={Link} to="/about"
@@ -148,7 +147,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="A" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
