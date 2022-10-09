@@ -27,7 +27,7 @@ create table ESTUDIANTE(
 IdEstudiante int primary key identity(1,1),
 Nombre varchar(60),
 Facultad varchar(60),
-CantidadCreditos varchar(60),
+CantidadCreditos int,
 )
 
 GO
