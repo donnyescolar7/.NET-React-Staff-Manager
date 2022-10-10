@@ -10,61 +10,14 @@ export default function App() {
     <BrowserRouter>
       <>
         <ResponsiveAppBar/>
-        <h1>Basic Example</h1>
         <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-            <Route path="cursos" element={<Cursos/>} />
-            <Route path="*" element={<NoMatch />} />
-          </Route>
+          <Route path="/"element={<Home />} />
+          <Route path="/cursos" element={<Cursos/>} />
+          <Route path="*" element={<NoMatch />} />
         </Routes>
       </>
 
     </BrowserRouter>
-  );
-}
-
-function Layout() {
-  return (
-    <div>
-      {/* A "layout route" is a good place to put markup you want to
-          share across all the pages on your site, like navigation. */}
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/dashboard">Dashboard</Link>
-          </li>
-          <li>
-            <Link to="/nothing-here">Nothing Here</Link>
-          </li>
-        </ul>
-      </nav>
-
-      <hr />
-      <Outlet />
-    </div>
-  );
-}
-
-function About() {
-  return (
-    <div>
-      <h2>About</h2>
-    </div>
-  );
-}
-
-function Dashboard() {
-  return (
-    <div>
-      <h2>Dashboard</h2>
-    </div>
   );
 }
 

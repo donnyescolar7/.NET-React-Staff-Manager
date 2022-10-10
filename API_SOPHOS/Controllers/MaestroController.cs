@@ -1,5 +1,6 @@
 using API_SOPHOS.Data;
 using API_SOPHOS.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_SOPHOS.Controllers
@@ -21,6 +22,7 @@ namespace API_SOPHOS.Controllers
             return MaestroData.Modificar(maestro);
         }
 
+        
         [HttpGet("{id:int}")]
         public Maestro Get(int id)
         {

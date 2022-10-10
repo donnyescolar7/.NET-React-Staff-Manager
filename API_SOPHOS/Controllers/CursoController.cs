@@ -1,5 +1,6 @@
 using API_SOPHOS.Data;
 using API_SOPHOS.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_SOPHOS.Controllers
@@ -20,16 +21,17 @@ namespace API_SOPHOS.Controllers
         {
             return CursoData.Modificar(curso);
         }
-
+        
         [HttpGet("{id:int}")]
         public Curso Get(int id)
         {
             return CursoData.Obtener(id);
         }
-
+        
         [HttpGet]
         public List<Curso> Get()
         {
+            Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
             return CursoData.Listar();
         }
 
