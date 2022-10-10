@@ -6,31 +6,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { IconButton } from '@mui/material';
+import { Visibility } from '@mui/icons-material';
 
-/*
+export default function TablaCursos({ data, showModal }) {
 
-cupos_disponibles
-: 
-20
-idcurso
-: 
-1
-idmaestro
-: 
-1
-nombre
-: 
-"Backend"
-nombre_prerrequisito
-: 
-"Algoritmia"
-numero_creditos
-: 
-3
-
-*/
-
-export default function TablaCursos({data}) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -41,6 +21,7 @@ export default function TablaCursos({data}) {
             <TableCell align="right"><strong>Créditos</strong></TableCell>
             <TableCell align="right"><strong>Id Maestro</strong></TableCell>
             <TableCell align="right"><strong>Prerrequisito</strong></TableCell>
+            <TableCell align="right"><strong>Detalles</strong></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -56,6 +37,12 @@ export default function TablaCursos({data}) {
               <TableCell align="right">{curso.numero_creditos}</TableCell>
               <TableCell align="right">{curso.idmaestro}</TableCell>
               <TableCell align="right">{curso.nombre_prerrequisito}</TableCell>
+              <TableCell align="right">
+                <IconButton color="primary" aria-label="upload picture" component="label"
+                onClick={() => showModal(true, curso)}>
+                  <Visibility/>
+                </IconButton>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
