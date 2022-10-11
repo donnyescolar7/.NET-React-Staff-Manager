@@ -2,6 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import TablaEstudiantesModal from './TablaEstudiantesModal';
 
 const style = {
   position: 'absolute',
@@ -14,7 +15,7 @@ const style = {
   p: 4,
 };
 
-export default function ModalDetCurso({open, showModal, curso}) {
+export default function ModalDetCurso({open, showModal, curso, estudiantes_lista}) {
 
   return (
     <div>
@@ -37,6 +38,7 @@ export default function ModalDetCurso({open, showModal, curso}) {
           <Typography  sx={{ mt: 2 }}>
             {curso?.nombre_prerrequisito}
           </Typography>
+          <TablaEstudiantesModal data={estudiantes_lista} showModal={showModal}/>
         </Box>
       </Modal>
     </div>

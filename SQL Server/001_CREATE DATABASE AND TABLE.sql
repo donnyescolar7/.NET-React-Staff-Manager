@@ -42,9 +42,7 @@ Experiencia int,
 
 GO
 
-
 --****************TABLAS DE RELACIONES****************--
-
 
 --*CURSO - ESTUDIANTE*--
 

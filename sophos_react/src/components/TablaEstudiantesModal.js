@@ -6,8 +6,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { IconButton } from '@mui/material';
+import { FormatListBulleted } from '@mui/icons-material';
 
-export default function TablaCursosModal({ data, showModal }) {
+export default function TablaEstudiantesModal({ data, showModal }) {
 
   return (
     <TableContainer component={Paper}>
@@ -16,25 +18,24 @@ export default function TablaCursosModal({ data, showModal }) {
           <TableRow>
             <TableCell><strong>id</strong></TableCell>
             <TableCell><strong>Nombre</strong></TableCell>
-            <TableCell align="right"><strong>Créditos</strong></TableCell>
-            <TableCell align="right"><strong>Id Maestro</strong></TableCell>
-            <TableCell align="right"><strong>Prerrequisito</strong></TableCell>
+            <TableCell align="right"><strong>Facultad</strong></TableCell>
+            <TableCell align="right"><strong>Semestre</strong></TableCell>
+            <TableCell align="right"><strong>Cant. Creditos</strong></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((curso) => (
+          {data.map((estudiante) => (
             <TableRow
-              key={curso.idcurso}
+              key={estudiante.idestudiante}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell>{curso.idcurso}</TableCell>
+              <TableCell>{estudiante.idestudiante}</TableCell>
               <TableCell component="th" scope="row">
-                {curso.nombre}
+                {estudiante.nombre}
               </TableCell>
-              <TableCell align="right">{curso.numero_creditos}</TableCell>
-              <TableCell align="right">{curso.idmaestro}</TableCell>
-              <TableCell align="right">{curso.nombre_prerrequisito}</TableCell>
-              
+              <TableCell align="right">{estudiante.facultad}</TableCell>
+              <TableCell align="right">{estudiante.semestre}</TableCell>
+              <TableCell align="right">{estudiante.cant_creditos}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -155,5 +155,47 @@ namespace API_SOPHOS.Data
             }
         }
 
+        public static List<Estudiante> ListarPorCurso(int id)
+        {
+            
+            List<Estudiante> ListaEstudiante = new List<Estudiante>();
+            using (SqlConnection oConexion = new SqlConnection(Conexion.rutaConexion))
+            {
+                SqlCommand cmd = new SqlCommand("estudiante_listar_por_curso", oConexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idcurso", id);
+
+                try
+                {
+                    oConexion.Open();
+                    cmd.ExecuteNonQuery();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        System.Diagnostics.Debug.WriteLine("DONNY: "+dr);
+                        while (dr.Read())
+                        {
+                            ListaEstudiante.Add(new Estudiante()
+                            {
+                                idestudiante = Convert.ToInt32(dr["IdEstudiante"]),
+                                nombre = dr["Nombre"].ToString(),
+                                facultad = dr["Facultad"].ToString(),
+                                semestre = Convert.ToInt32(dr["semestre"]),
+                                cant_creditos = Convert.ToInt32(dr["CantidadCreditos"])
+                            });
+                        }
+
+                    }
+
+                    return ListaEstudiante;
+                }
+                catch (Exception ex)
+                {
+                    return ListaEstudiante;
+                }
+            }
+
+        }
+
     }
 }
