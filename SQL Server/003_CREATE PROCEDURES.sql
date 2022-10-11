@@ -138,6 +138,23 @@ end
 
 go
 
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'curso_listar_por_maestro')
+DROP PROCEDURE curso_listar_por_maestro
+
+go
+
+create procedure curso_listar_por_maestro(@idmaestro int)
+as
+begin
+
+SELECT *,
+(Curso.Cupos - (SELECT COUNT(*) FROM R_CURSO_ESTUDIANTE WHERE R_CURSO_ESTUDIANTE.IdCurso = CURSO.IdCurso)) AS CuposDisponibles
+FROM CURSO
+WHERE CURSO.IdMaestro = @idmaestro
+
+end
+
+go
 --************************ PROCEDIMIENTOS ESTUDIANTE************************--
 
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'estudiante_crear')

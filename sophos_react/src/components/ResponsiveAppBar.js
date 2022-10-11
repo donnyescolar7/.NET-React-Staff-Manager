@@ -142,6 +142,14 @@ const ResponsiveAppBar = () => {
             >
               Estudiantes
             </Button>
+            <Button
+              component={Link} to="/maestros"
+              key="Maestros"
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              Maestros
+            </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

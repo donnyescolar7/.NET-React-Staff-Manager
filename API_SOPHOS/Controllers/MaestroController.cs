@@ -32,6 +32,7 @@ namespace API_SOPHOS.Controllers
         [HttpGet]
         public List<Maestro> Get()
         {
+            Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
             return MaestroData.Listar();
         }
 

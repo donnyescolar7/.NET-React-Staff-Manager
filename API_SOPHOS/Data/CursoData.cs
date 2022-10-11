@@ -203,5 +203,47 @@ namespace API_SOPHOS.Data
             }
         }
 
+        public static List<Curso> ListarPorMaestro(int id)
+        {
+            List<Curso> ListaUsuario = new List<Curso>();
+            using (SqlConnection oConexion = new SqlConnection(Conexion.rutaConexion))
+            {
+                SqlCommand cmd = new SqlCommand("curso_listar_por_maestro", oConexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idmaestro", id);
+
+                try
+                {
+                    oConexion.Open();
+                    cmd.ExecuteNonQuery();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+
+                        while (dr.Read())
+                        {
+                            ListaUsuario.Add(new Curso()
+                            {
+                                idcurso = Convert.ToInt32(dr["IdCurso"]),
+                                nombre = dr["Nombre"].ToString(),
+                                nombre_prerrequisito = dr["NombrePrerrequisito"].ToString(),
+                                numero_creditos = Convert.ToInt32(dr["NumeroCreditos"]),
+                                cupos = Convert.ToInt32(dr["Cupos"]),
+                                cupos_disponibles = Convert.ToInt32(dr["CuposDisponibles"]),
+                                idmaestro = Convert.ToInt32(dr["IdMaestro"])
+                            });
+                        }
+
+                    }
+
+                    return ListaUsuario;
+                }
+                catch (Exception ex)
+                {
+                    return ListaUsuario;
+                }
+            }
+        }
+
     }
 }
