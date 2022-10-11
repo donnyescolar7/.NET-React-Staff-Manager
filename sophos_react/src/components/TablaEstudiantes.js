@@ -39,7 +39,7 @@ export default function TablaEstudiantes({ data, showModal }) {
               <TableCell align="right">{estudiante.cant_creditos}</TableCell>
               <TableCell align="right">
                 <IconButton color="primary" aria-label="upload picture" component="label"
-                onClick={() => showModal(true, estudiante)}>
+                onClick={() => showModal(true, estudiante.idestudiante)}>
                   <FormatListBulleted/>
                 </IconButton>
               </TableCell>

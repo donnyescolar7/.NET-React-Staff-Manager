@@ -3,7 +3,7 @@ import axios from 'axios'
 import constants from '../Constants'
 import TablaCursos from './TablaCursos'
 import { Button } from '@mui/material'
-import BasicModal from './ModalDetalles'
+import ModalDetCurso from './ModalDetCurso'
 
 const Cursos = () => {
 
@@ -35,7 +35,7 @@ const Cursos = () => {
       <h2>Cursos</h2>
       <Button variant="contained">Crear Curso</Button>
       <TablaCursos data={cursos_lista} showModal={showModal}/>
-      <BasicModal open={openModal} showModal={showModal} curso={curso_modal}/>
+      <ModalDetCurso open={openModal} showModal={showModal} curso={curso_modal}/>
     </div>
   );
 
