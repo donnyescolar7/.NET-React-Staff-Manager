@@ -135,12 +135,12 @@ const ResponsiveAppBar = () => {
               Cursos
             </Button>
             <Button
-              component={Link} to="/about"
-              key="Home3"
+              component={Link} to="/estudiantes"
+              key="Estudiantes"
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-              Home3333
+              Estudiantes
             </Button>
           </Box>
 

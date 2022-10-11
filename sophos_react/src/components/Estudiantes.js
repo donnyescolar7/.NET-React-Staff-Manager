@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import constants from '../Constants'
-import TablaCursos from './TablaCursos'
 import { Button } from '@mui/material'
 import BasicModal from './ModalDetalles'
+import TablaEstudiantes from './TablaEstudiantes'
 
-const Cursos = () => {
+const Estudiantes = () => {
 
   const [cursos_lista, setLista] = useState([])
   const [openModal, setOpenModal] = useState(false)
@@ -17,7 +17,7 @@ const Cursos = () => {
 
   const getData = async () => {
     try {
-      const res = await axios.get(constants.api_curso)
+      const res = await axios.get(constants.api_estudiante)
       console.log(res);
       setLista(res.data)
     } catch (error) {
@@ -32,13 +32,13 @@ const Cursos = () => {
 
   return (
     <div>
-      <h2>Cursos</h2>
-      <Button variant="contained">Crear Curso</Button>
-      <TablaCursos data={cursos_lista} showModal={showModal}/>
+      <h2>Estudiantes</h2>
+      <Button variant="contained">Agregar Estudiante</Button>
+      <TablaEstudiantes data={cursos_lista} showModal={showModal}/>
       <BasicModal open={openModal} showModal={showModal} curso={curso_modal}/>
     </div>
   );
 
 }
 
-export default Cursos
+export default Estudiantes

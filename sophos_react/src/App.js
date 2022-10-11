@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Outlet, Link } from "react-router-dom";
 import Home from "./components/Home";
 import Cursos from "./components/Cursos";
 import ResponsiveAppBar from "./components/ResponsiveAppBar";
+import Estudiantes from "./components/Estudiantes";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Routes>
           <Route path="/"element={<Home />} />
           <Route path="/cursos" element={<Cursos/>} />
+          <Route path="/estudiantes" element={<Estudiantes/>} />
           <Route path="*" element={<NoMatch />} />
         </Routes>
       </>

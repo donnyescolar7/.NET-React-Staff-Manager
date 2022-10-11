@@ -12,19 +12,19 @@ create procedure curso_crear(
 @nombre varchar(60),
 @nombre_prerrequisito varchar(60),
 @numero_creditos int,
-@cupos_disponibles int,
+@cupos int,
 @idmaestro int
 )
 as
 begin
 
-insert into CURSO(Nombre,NombrePrerrequisito,NumeroCreditos,CuposDisponibles,IdMaestro)
+insert into CURSO(Nombre,NombrePrerrequisito,NumeroCreditos,Cupos,IdMaestro)
 values
 (
 @nombre,
 @nombre_prerrequisito,
 @numero_creditos,
-@cupos_disponibles,
+@cupos,
 @idmaestro
 )
 
@@ -42,7 +42,7 @@ create procedure curso_modificar(
 @nombre varchar(60),
 @nombre_prerrequisito varchar(60),
 @numero_creditos int,
-@cupos_disponibles int,
+@cupos int,
 @idmaestro int
 )
 as
@@ -52,7 +52,7 @@ UPDATE CURSO SET
 Nombre = @nombre,
 NombrePrerrequisito = @nombre_prerrequisito,
 NumeroCreditos = @numero_creditos,
-CuposDisponibles = @cupos_disponibles,
+Cupos = @cupos,
 IdMaestro = @idmaestro
 WHERE IdCurso = @idcurso
 
@@ -69,7 +69,11 @@ create procedure curso_listar
 as
 begin
 
-select * from curso
+/*select * from curso*/
+
+SELECT *,
+(Curso.Cupos - (SELECT COUNT(*) FROM R_CURSO_ESTUDIANTE WHERE R_CURSO_ESTUDIANTE.IdCurso = CURSO.IdCurso)) AS CuposDisponibles
+FROM CURSO
 
 end
 
@@ -84,7 +88,13 @@ create procedure curso_obtener(@idcurso int)
 as
 begin
 
-select * from curso where IdCurso = @idcurso
+/*select * from curso where IdCurso = @idcurso*/
+
+SELECT *,
+(Curso.Cupos - (SELECT COUNT(*) FROM R_CURSO_ESTUDIANTE WHERE R_CURSO_ESTUDIANTE.IdCurso = CURSO.IdCurso)) AS CuposDisponibles
+FROM CURSO
+WHERE CURSO.IdCurso = @idcurso
+
 end
 
 go
@@ -106,6 +116,26 @@ end
 
 go
 
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'curso_listar_por_estudiante')
+DROP PROCEDURE curso_listar_por_estudiante
+
+go
+
+create procedure curso_listar_por_estudiante(@idestudiante int)
+as
+begin
+
+/*select * from curso*/
+
+SELECT *,
+(Curso.Cupos - (SELECT COUNT(*) FROM R_CURSO_ESTUDIANTE WHERE R_CURSO_ESTUDIANTE.IdCurso = CURSO.IdCurso)) AS CuposDisponibles
+FROM CURSO
+WHERE CURSO.IdCurso 
+IN (SELECT R_CURSO_ESTUDIANTE.IdCurso FROM R_CURSO_ESTUDIANTE WHERE R_CURSO_ESTUDIANTE.IdEstudiante = @idestudiante)
+
+
+end
+
 --************************ PROCEDIMIENTOS ESTUDIANTE************************--
 
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'estudiante_crear')
@@ -116,17 +146,17 @@ go
 create procedure estudiante_crear(
 @nombre varchar(60),
 @facultad varchar(60),
-@cant_creditos int
+@semestre int
 )
 as
 begin
 
-insert into ESTUDIANTE(Nombre, Facultad, CantidadCreditos)
+insert into ESTUDIANTE(Nombre, Facultad, Semestre)
 values
 (
 @nombre,
 @facultad,
-@cant_creditos
+@semestre
 )
 
 end
@@ -142,7 +172,7 @@ create procedure estudiante_modificar(
 @idestudiante int,
 @nombre varchar(60),
 @facultad varchar(60),
-@cant_creditos int
+@semestre int
 )
 as
 begin
@@ -150,7 +180,7 @@ begin
 UPDATE ESTUDIANTE SET
 Nombre = @nombre,
 Facultad = @facultad,
-CantidadCreditos = @cant_creditos
+Semestre = @semestre
 WHERE IdEstudiante = @idestudiante
 
 end
@@ -166,7 +196,17 @@ create procedure estudiante_listar
 as
 begin
 
-select * from estudiante
+/*select * from estudiante*/
+
+SELECT 
+   *,
+   (SELECT  ISNULL(SUM(CURSO_CRED.NumeroCreditos), 0)
+    FROM (SELECT R_CURSO_ESTUDIANTE.IdCurso, R_CURSO_ESTUDIANTE.IdEstudiante, CURSO.NumeroCreditos
+    FROM R_CURSO_ESTUDIANTE
+    JOIN CURSO ON CURSO.IdCurso = R_CURSO_ESTUDIANTE.IdCurso
+	)AS CURSO_CRED
+    WHERE CURSO_CRED.IdEstudiante = ESTUDIANTE.IdEstudiante) AS CantidadCreditos
+FROM ESTUDIANTE
 
 end
 
@@ -299,4 +339,3 @@ delete from maestro where IdMaestro = @idmaestro
 end
 
 go
-

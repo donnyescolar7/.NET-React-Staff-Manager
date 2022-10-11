@@ -15,7 +15,7 @@ namespace API_SOPHOS.Data
                 cmd.Parameters.AddWithValue("@nombre", curso.nombre);
                 cmd.Parameters.AddWithValue("@nombre_prerrequisito", curso.nombre_prerrequisito);
                 cmd.Parameters.AddWithValue("@numero_creditos", curso.numero_creditos);
-                cmd.Parameters.AddWithValue("@cupos_disponibles", curso.cupos_disponibles);
+                cmd.Parameters.AddWithValue("@cupos_disponibles", curso.cupos);
                 cmd.Parameters.AddWithValue("@idmaestro", curso.idmaestro);
 
                 try 
@@ -42,7 +42,7 @@ namespace API_SOPHOS.Data
                 cmd.Parameters.AddWithValue("@nombre", curso.nombre);
                 cmd.Parameters.AddWithValue("@nombre_prerrequisito", curso.nombre_prerrequisito);
                 cmd.Parameters.AddWithValue("@numero_creditos", curso.numero_creditos);
-                cmd.Parameters.AddWithValue("@cupos_disponibles", curso.cupos_disponibles);
+                cmd.Parameters.AddWithValue("@cupos_disponibles", curso.cupos);
                 cmd.Parameters.AddWithValue("@idmaestro", curso.idmaestro);
 
                 try
@@ -83,6 +83,7 @@ namespace API_SOPHOS.Data
                                 nombre = dr["Nombre"].ToString(),
                                 nombre_prerrequisito = dr["NombrePrerrequisito"].ToString(),
                                 numero_creditos = Convert.ToInt32(dr["NumeroCreditos"]),
+                                cupos = Convert.ToInt32(dr["Cupos"]),
                                 cupos_disponibles = Convert.ToInt32(dr["CuposDisponibles"]),
                                 idmaestro = Convert.ToInt32(dr["IdMaestro"])
                             });
@@ -123,6 +124,7 @@ namespace API_SOPHOS.Data
                                 nombre = dr["Nombre"].ToString(),
                                 nombre_prerrequisito = dr["NombrePrerrequisito"].ToString(),
                                 numero_creditos = Convert.ToInt32(dr["NumeroCreditos"]),
+                                cupos = Convert.ToInt32(dr["Cupos"]),
                                 cupos_disponibles = Convert.ToInt32(dr["CuposDisponibles"]),
                                 idmaestro = Convert.ToInt32(dr["IdMaestro"])
                             };
@@ -155,6 +157,48 @@ namespace API_SOPHOS.Data
                 catch (Exception ex)
                 {
                     return false;
+                }
+            }
+        }
+
+        public static List<Curso> ListarPorEstudiante(int id)
+        {
+            List<Curso> ListaUsuario = new List<Curso>();
+            using (SqlConnection oConexion = new SqlConnection(Conexion.rutaConexion))
+            {
+                SqlCommand cmd = new SqlCommand("curso_listar_por_estudiante", oConexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idestudiante", id);
+
+                try
+                {
+                    oConexion.Open();
+                    cmd.ExecuteNonQuery();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+
+                        while (dr.Read())
+                        {
+                            ListaUsuario.Add(new Curso()
+                            {
+                                idcurso = Convert.ToInt32(dr["IdCurso"]),
+                                nombre = dr["Nombre"].ToString(),
+                                nombre_prerrequisito = dr["NombrePrerrequisito"].ToString(),
+                                numero_creditos = Convert.ToInt32(dr["NumeroCreditos"]),
+                                cupos = Convert.ToInt32(dr["Cupos"]),
+                                cupos_disponibles = Convert.ToInt32(dr["CuposDisponibles"]),
+                                idmaestro = Convert.ToInt32(dr["IdMaestro"])
+                            });
+                        }
+
+                    }
+
+                    return ListaUsuario;
+                }
+                catch (Exception ex)
+                {
+                    return ListaUsuario;
                 }
             }
         }

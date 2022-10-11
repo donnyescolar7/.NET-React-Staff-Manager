@@ -41,6 +41,14 @@ namespace API_SOPHOS.Controllers
             return CursoData.Eliminar(id);
         }
 
+        [HttpGet("listarporestudiante/{id:int}")]
+        public List<Curso> GetListarPorEstudiante(int id)
+        {
+            Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
+            return CursoData.ListarPorEstudiante(id);
+        }
+        
+
 
     }
 }

@@ -30,6 +30,7 @@ namespace API_SOPHOS.Controllers
         [HttpGet]
         public List<Estudiante> Get()
         {
+            Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
             return EstudianteData.Listar();
         }
 

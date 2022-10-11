@@ -15,7 +15,7 @@ IdCurso int primary key identity(1,1),
 Nombre varchar(60),
 NombrePrerrequisito varchar(60),
 NumeroCreditos int,
-CuposDisponibles int,
+Cupos int,
 IdMaestro int,
 
 )
@@ -27,7 +27,7 @@ create table ESTUDIANTE(
 IdEstudiante int primary key identity(1,1),
 Nombre varchar(60),
 Facultad varchar(60),
-CantidadCreditos int,
+Semestre int,
 )
 
 GO
@@ -61,7 +61,7 @@ CONSTRAINT FK_R_IDESTUDIANTE FOREIGN KEY (IdEstudiante) REFERENCES ESTUDIANTE(Id
 
 GO
 
---*CURSO - ESTUDIANTE*--
+--*CURSO - MAESTRO*--
 
 if not exists (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND TABLE_NAME = 'R_CURSO_MAESTRO')
 create table R_CURSO_MAESTRO(

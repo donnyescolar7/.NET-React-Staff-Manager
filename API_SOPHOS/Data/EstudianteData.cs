@@ -14,6 +14,7 @@ namespace API_SOPHOS.Data
                 
                 cmd.Parameters.AddWithValue("@nombre", estudiante.nombre);
                 cmd.Parameters.AddWithValue("@facultad", estudiante.facultad);
+                cmd.Parameters.AddWithValue("@semestre", estudiante.semestre);
                 cmd.Parameters.AddWithValue("@cant_creditos", estudiante.cant_creditos);
 
                 try 
@@ -39,6 +40,7 @@ namespace API_SOPHOS.Data
                 cmd.Parameters.AddWithValue("@idestudiante", estudiante.idestudiante);
                 cmd.Parameters.AddWithValue("@nombre", estudiante.nombre);
                 cmd.Parameters.AddWithValue("@facultad", estudiante.facultad);
+                cmd.Parameters.AddWithValue("@semestre", estudiante.semestre);
                 cmd.Parameters.AddWithValue("@cant_creditos", estudiante.cant_creditos);
 
                 try
@@ -78,6 +80,7 @@ namespace API_SOPHOS.Data
                                 idestudiante = Convert.ToInt32(dr["IdEstudiante"]),
                                 nombre = dr["Nombre"].ToString(),
                                 facultad = dr["Facultad"].ToString(),
+                                semestre = Convert.ToInt32(dr["semestre"]),
                                 cant_creditos = Convert.ToInt32(dr["CantidadCreditos"])
                             });
                         }
@@ -116,6 +119,7 @@ namespace API_SOPHOS.Data
                                 idestudiante = Convert.ToInt32(dr["IdEstudiante"]),
                                 nombre = dr["Nombre"].ToString(),
                                 facultad = dr["Facultad"].ToString(),
+                                semestre = Convert.ToInt32(dr["semestre"]),
                                 cant_creditos = Convert.ToInt32(dr["CantidadCreditos"])
                             };
                         }
