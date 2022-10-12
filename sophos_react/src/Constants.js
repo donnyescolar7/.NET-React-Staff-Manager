@@ -6,6 +6,7 @@ const constants = {
     api_maestros: "https://localhost:44340/maestro",
     api_cursos_por_maestro: "https://localhost:44340/curso/listarpormaestro/",
     api_Eliminar_RCursoEstudiante: "https://localhost:44340/curso/eliminar_r_curso_estudiante/",
+    api_Agregar_RCursoEstudiante: "https://localhost:44340/curso/agregar_r_curso_estudiante/",
 }
 
 export default constants

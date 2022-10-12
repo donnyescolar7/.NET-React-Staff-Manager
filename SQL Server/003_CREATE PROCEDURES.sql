@@ -418,3 +418,25 @@ delete from R_CURSO_ESTUDIANTE where IdCurso = @idcurso AND IdEstudiante = @ides
 end
 
 go
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'r_curso_estudiante_agregar')
+DROP PROCEDURE r_curso_estudiante_agregar
+
+go
+create procedure r_curso_estudiante_agregar(
+@idcurso int,
+@idestudiante int
+)
+as
+begin
+
+insert into R_CURSO_ESTUDIANTE(IdCurso, IdEstudiante)
+values
+(
+@idcurso,
+@idestudiante
+)
+
+end
+
+go

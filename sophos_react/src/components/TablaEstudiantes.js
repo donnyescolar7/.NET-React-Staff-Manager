@@ -18,10 +18,10 @@ export default function TablaEstudiantes({ data, showModal }) {
           <TableRow>
             <TableCell><strong>id</strong></TableCell>
             <TableCell><strong>Nombre</strong></TableCell>
-            <TableCell align="right"><strong>Facultad</strong></TableCell>
-            <TableCell align="right"><strong>Semestre</strong></TableCell>
-            <TableCell align="right"><strong>Cant. Creditos</strong></TableCell>
-            <TableCell align="right"><strong>Cursos</strong></TableCell>
+            <TableCell align="center"><strong>Facultad</strong></TableCell>
+            <TableCell align="center"><strong>Semestre</strong></TableCell>
+            <TableCell align="center"><strong>Cant. Creditos</strong></TableCell>
+            <TableCell align="center"><strong>Cursos</strong></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -34,10 +34,10 @@ export default function TablaEstudiantes({ data, showModal }) {
               <TableCell component="th" scope="row">
                 {estudiante.nombre}
               </TableCell>
-              <TableCell align="right">{estudiante.facultad}</TableCell>
-              <TableCell align="right">{estudiante.semestre}</TableCell>
-              <TableCell align="right">{estudiante.cant_creditos}</TableCell>
-              <TableCell align="right">
+              <TableCell align="center">{estudiante.facultad}</TableCell>
+              <TableCell align="center">{estudiante.semestre}</TableCell>
+              <TableCell align="center">{estudiante.cant_creditos}</TableCell>
+              <TableCell align="center">
                 <IconButton color="primary" aria-label="upload picture" component="label"
                 onClick={() => showModal(true, estudiante.idestudiante)}>
                   <FormatListBulleted/>

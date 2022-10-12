@@ -16,11 +16,11 @@ export default function TablaMaestros({ data, showModal }) {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell><strong>id</strong></TableCell>
-            <TableCell><strong>Nombre</strong></TableCell>
-            <TableCell align="right"><strong>Titulo</strong></TableCell>
-            <TableCell align="right"><strong>Experiencia</strong></TableCell>
-            <TableCell align="right"><strong>Cursos</strong></TableCell>
+            <TableCell align="center"><strong>id</strong></TableCell>
+            <TableCell align="center"><strong>Nombre</strong></TableCell>
+            <TableCell align="center"><strong>Titulo</strong></TableCell>
+            <TableCell align="center"><strong>Experiencia</strong></TableCell>
+            <TableCell align="center"><strong>Cursos</strong></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -29,13 +29,13 @@ export default function TablaMaestros({ data, showModal }) {
               key={maestro.idmaestro}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell>{maestro.idmaestro}</TableCell>
-              <TableCell component="th" scope="row">
+              <TableCell align="center">{maestro.idmaestro}</TableCell>
+              <TableCell align="center" component="th" scope="row">
                 {maestro.nombre}
               </TableCell>
-              <TableCell align="right">{maestro.titulo}</TableCell>
-              <TableCell align="right">{maestro.experiencia}</TableCell>
-              <TableCell align="right">
+              <TableCell align="center">{maestro.titulo}</TableCell>
+              <TableCell align="center">{maestro.experiencia}</TableCell>
+              <TableCell align="center">
                 <IconButton color="primary" aria-label="upload picture" component="label"
                 onClick={() => showModal(true, maestro.idmaestro)}>
                   <FormatListBulleted/>

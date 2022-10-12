@@ -42,9 +42,12 @@ export default function ModalDetCurso({ open, showModal, curso }) {
     console.log("Idestudi"+idesudiante);
     try {
       /*Falta agregaaaaaaaaaaar */
-      req = inscritoValue ? "" : constants.api_Eliminar_RCursoEstudiante + curso.idcurso+"/"+idesudiante
+      const req = inscritoValue ? 
+      constants.api_Agregar_RCursoEstudiante + curso.idcurso+"/"+idesudiante 
+      :
+      constants.api_Eliminar_RCursoEstudiante + curso.idcurso+"/"+idesudiante
 
-      const res = await axios.post(constants.api_Eliminar_RCursoEstudiante + curso.idcurso+"/"+idesudiante)
+      const res = await axios.post(req)
       console.log(res.data);
       if(res.data){
         estudiantes_lista[estudiantes_lista.findIndex((e) => e.idestudiante === idesudiante)].esta_en_curso = inscritoValue

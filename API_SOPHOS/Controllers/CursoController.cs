@@ -56,10 +56,17 @@ namespace API_SOPHOS.Controllers
         }
 
         [HttpPost("eliminar_r_curso_estudiante/{idcurso:int}/{idestudiante:int}")]
-        public bool Post(int idcurso, int idestudiante)
+        public bool eliminar_r_curso_estudiante(int idcurso, int idestudiante)
         {
             Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
             return CursoData.EliminarRCursoEstudiante(idcurso, idestudiante);
+        }
+
+        [HttpPost("agregar_r_curso_estudiante/{idcurso:int}/{idestudiante:int}")]
+        public bool agregar_r_curso_estudiante(int idcurso, int idestudiante)
+        {
+            Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
+            return CursoData.AgregarRCursoEstudiante(idcurso, idestudiante);
         }
 
     }
