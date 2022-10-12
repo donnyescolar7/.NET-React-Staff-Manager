@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import constants from '../Constants'
 import { Button } from '@mui/material'
-import ModalDetCurso from './ModalDetCurso'
 import TablaMaestros from './TablaMaestros'
 import ModalDetEstudiante from './ModalDetEstudiante'
 

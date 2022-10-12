@@ -55,5 +55,12 @@ namespace API_SOPHOS.Controllers
             return CursoData.ListarPorMaestro(id);
         }
 
+        [HttpPost("eliminar_r_curso_estudiante/{idcurso:int}/{idestudiante:int}")]
+        public bool Post(int idcurso, int idestudiante)
+        {
+            Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
+            return CursoData.EliminarRCursoEstudiante(idcurso, idestudiante);
+        }
+
     }
 }

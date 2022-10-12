@@ -271,7 +271,7 @@ create procedure estudiante_listar_por_curso(@idcurso int)
 as
 begin
 
-SELECT 
+/*SELECT 
    *,
    (SELECT  ISNULL(SUM(CURSO_CRED.NumeroCreditos), 0)
     FROM (SELECT R_CURSO_ESTUDIANTE.IdCurso, R_CURSO_ESTUDIANTE.IdEstudiante, CURSO.NumeroCreditos
@@ -281,7 +281,24 @@ SELECT
     WHERE CURSO_CRED.IdEstudiante = ESTUDIANTE.IdEstudiante) AS CantidadCreditos
 FROM ESTUDIANTE
 WHERE ESTUDIANTE.IdEstudiante 
-IN (SELECT R_CURSO_ESTUDIANTE.IdEstudiante FROM R_CURSO_ESTUDIANTE WHERE R_CURSO_ESTUDIANTE.IdCurso = @idcurso)
+IN (SELECT R_CURSO_ESTUDIANTE.IdEstudiante FROM R_CURSO_ESTUDIANTE WHERE R_CURSO_ESTUDIANTE.IdCurso = @idcurso)*/
+
+SELECT 
+   *,
+   (SELECT  ISNULL(SUM(CURSO_CRED.NumeroCreditos), 0)
+    FROM (SELECT R_CURSO_ESTUDIANTE.IdCurso, R_CURSO_ESTUDIANTE.IdEstudiante, CURSO.NumeroCreditos
+    FROM R_CURSO_ESTUDIANTE
+    JOIN CURSO ON CURSO.IdCurso = R_CURSO_ESTUDIANTE.IdCurso
+	)AS CURSO_CRED
+    WHERE CURSO_CRED.IdEstudiante = ESTUDIANTE.IdEstudiante) AS CantidadCreditos,
+    (SELECT COUNT(*)
+    FROM R_CURSO_ESTUDIANTE
+    WHERE 
+    R_CURSO_ESTUDIANTE.IdEstudiante = ESTUDIANTE.IdEstudiante 
+    AND
+    R_CURSO_ESTUDIANTE.IdCurso = @idcurso
+    ) AS EstaEnCurso
+FROM ESTUDIANTE
 
 end
 
@@ -379,6 +396,24 @@ as
 begin
 
 delete from maestro where IdMaestro = @idmaestro
+
+end
+
+go
+
+/****************PROCEDIMIENTOS R_CURSO_ESTUDIANTE*********************/
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'r_curso_estudiante_eliminar')
+DROP PROCEDURE r_curso_estudiante_eliminar
+
+go
+create procedure r_curso_estudiante_eliminar(
+@idcurso int,
+@idestudiante int
+)
+as
+begin
+
+delete from R_CURSO_ESTUDIANTE where IdCurso = @idcurso AND IdEstudiante = @idestudiante
 
 end
 

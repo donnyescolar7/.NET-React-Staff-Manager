@@ -1,8 +1,10 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TablaEstudiantesModal from './TablaEstudiantesModal';
+import axios from 'axios'
+import constants from '../Constants'
 
 const style = {
   position: 'absolute',
@@ -15,30 +17,59 @@ const style = {
   p: 4,
 };
 
-export default function ModalDetCurso({open, showModal, curso, estudiantes_lista}) {
+export default function ModalDetCurso({ open, showModal, curso }) {
+
+  const [estudiantes_lista, setLista] = useState([])
+  //console.log("HOLAAJASIFISJISJIGSD");
+
+  useEffect(()=>{
+    loadData()
+  },[])
+
+  const loadData = async () => {
+    console.log(curso)
+    try {
+      const res = await axios.get(constants.api_estudiantes_por_curso + curso.idcurso)
+      console.log(res);
+      setLista(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const actualizarLista = async (idesudiante, inscritoValue) => {
+    console.log(curso)
+    console.log("Idestudi"+idesudiante);
+    try {
+      /*Falta agregaaaaaaaaaaar */
+      req = inscritoValue ? "" : constants.api_Eliminar_RCursoEstudiante + curso.idcurso+"/"+idesudiante
+
+      const res = await axios.post(constants.api_Eliminar_RCursoEstudiante + curso.idcurso+"/"+idesudiante)
+      console.log(res.data);
+      if(res.data){
+        estudiantes_lista[estudiantes_lista.findIndex((e) => e.idestudiante === idesudiante)].esta_en_curso = inscritoValue
+        setLista([...estudiantes_lista])
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+    
+  }
 
   return (
     <div>
       <Modal
         open={open}
-        onClose={()=>showModal(false)}
+        onClose={() => showModal(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography  variant="h6" component="h2">
+          <Typography variant="h6" component="h2">
             {curso?.nombre}
           </Typography>
-          <Typography  sx={{ mt: 2 }}>
-            {curso?.numero_creditos}
-          </Typography>
-          <Typography  sx={{ mt: 2 }}>
-            {curso?.idmaestro}
-          </Typography>
-          <Typography  sx={{ mt: 2 }}>
-            {curso?.nombre_prerrequisito}
-          </Typography>
-          <TablaEstudiantesModal data={estudiantes_lista} showModal={showModal}/>
+          <TablaEstudiantesModal data={estudiantes_lista} actualizarLista={actualizarLista} />
         </Box>
       </Modal>
     </div>

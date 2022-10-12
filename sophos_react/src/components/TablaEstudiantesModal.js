@@ -7,9 +7,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { IconButton } from '@mui/material';
-import { FormatListBulleted } from '@mui/icons-material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
 
-export default function TablaEstudiantesModal({ data, showModal }) {
+export default function TablaEstudiantesModal({ data, actualizarLista }) {
 
   return (
     <TableContainer component={Paper}>
@@ -18,9 +19,11 @@ export default function TablaEstudiantesModal({ data, showModal }) {
           <TableRow>
             <TableCell><strong>id</strong></TableCell>
             <TableCell><strong>Nombre</strong></TableCell>
-            <TableCell align="right"><strong>Facultad</strong></TableCell>
-            <TableCell align="right"><strong>Semestre</strong></TableCell>
-            <TableCell align="right"><strong>Cant. Creditos</strong></TableCell>
+            <TableCell align="center"><strong>Facultad</strong></TableCell>
+            <TableCell align="center"><strong>Semestre</strong></TableCell>
+            <TableCell align="center"><strong>Creditos</strong></TableCell>
+            <TableCell align="center"><strong>Inscrito</strong></TableCell>
+            <TableCell align="center"><strong>Acción</strong></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -33,9 +36,36 @@ export default function TablaEstudiantesModal({ data, showModal }) {
               <TableCell component="th" scope="row">
                 {estudiante.nombre}
               </TableCell>
-              <TableCell align="right">{estudiante.facultad}</TableCell>
-              <TableCell align="right">{estudiante.semestre}</TableCell>
-              <TableCell align="right">{estudiante.cant_creditos}</TableCell>
+              <TableCell align="center">{estudiante.facultad}</TableCell>
+              <TableCell align="center">{estudiante.semestre}</TableCell>
+              <TableCell align="center">{estudiante.cant_creditos}</TableCell>
+              
+                {
+                estudiante.esta_en_curso ?
+                <TableCell align="center">Si</TableCell>
+                :
+                <TableCell align="center">No</TableCell>
+                }
+                
+              
+              <TableCell align="center">
+                {
+                  estudiante.esta_en_curso ?
+                  <IconButton color="primary" aria-label="upload picture" component="label"
+                onClick={() => {actualizarLista(estudiante.idestudiante, 0)}}
+                >
+                  <DeleteIcon/>
+                  
+                </IconButton>
+                :
+                <IconButton color="primary" aria-label="upload picture" component="label"
+                onClick={() => {actualizarLista(estudiante.idestudiante, 1)}}
+                >
+                  <AddIcon/>
+                </IconButton>
+                }
+                
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

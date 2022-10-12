@@ -7,5 +7,6 @@
         public string facultad { get; set; }
         public int semestre{ get; set; }
         public int cant_creditos { get; set; }
+        public int esta_en_curso { get; set; }
     }
 }

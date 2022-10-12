@@ -245,5 +245,27 @@ namespace API_SOPHOS.Data
             }
         }
 
+        public static bool EliminarRCursoEstudiante(int idcurso, int idestudiante)
+        {
+            using (SqlConnection oConexion = new SqlConnection(Conexion.rutaConexion))
+            {
+                SqlCommand cmd = new SqlCommand("r_curso_estudiante_eliminar", oConexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idcurso", idcurso);
+                cmd.Parameters.AddWithValue("@idestudiante", idestudiante);
+
+                try
+                {
+                    oConexion.Open();
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
+
     }
 }

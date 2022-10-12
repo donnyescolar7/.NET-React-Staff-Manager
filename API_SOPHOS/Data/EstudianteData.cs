@@ -181,7 +181,8 @@ namespace API_SOPHOS.Data
                                 nombre = dr["Nombre"].ToString(),
                                 facultad = dr["Facultad"].ToString(),
                                 semestre = Convert.ToInt32(dr["semestre"]),
-                                cant_creditos = Convert.ToInt32(dr["CantidadCreditos"])
+                                cant_creditos = Convert.ToInt32(dr["CantidadCreditos"]),
+                                esta_en_curso = Convert.ToInt32(dr["EstaEnCurso"])
                             });
                         }
 
