@@ -22,6 +22,10 @@ const style = {
 
 export default function ModalCrearEstudiante({ open, setOpenModalCrear }) {
 
+  const [nombre, setNombre] = useState("");
+  const [facultad, setFacultad] = useState("");
+  const [semestre, setSemestre] = useState(0);
+
   /*const [estudiantes_lista, setLista] = useState([])
 
   useEffect(()=>{
@@ -71,20 +75,22 @@ export default function ModalCrearEstudiante({ open, setOpenModalCrear }) {
       >
         <Box sx={style}>
           <Stack direction="column" spacing={2}>
-          <Typography variant="h6" component="h2">
-            Crear Estudiante
-          </Typography>
-          <TextField fullWidth label="Nombre" id="nombre" />
-          <TextField fullWidth label="Facultad" id="facultad" />
-          <TextField fullWidth label="Semestre" id="semestre" />
-          <Stack direction="row" spacing={2}>
-          <Button variant="contained" onClick={()=>setOpenModalCrear(true)}>Agregar Estudiante</Button>
-          <Button color="error" variant="contained" onClick={()=>setOpenModalCrear(true)}>Cancelar</Button>
+            <Typography variant="h6" component="h2">
+              Crear Estudiante
+            </Typography>
+            <TextField fullWidth label="Nombre" id="nombre"
+              value={nombre} onChange={(e) => setNombre(e.target.value)} />
+            <TextField fullWidth label="Facultad" id="facultad" />
+            <TextField type="number" fullWidth label="Semestre" id="semestre" />
+            <Stack direction="row" spacing={2}>
+              <Button variant="contained" onClick={() => console.log(nombre)}>Agregar Estudiante</Button>
+              <Button color="error" variant="contained" onClick={() => console.log(nombre)}>Cancelar</Button>
+            </Stack>
           </Stack>
-          </Stack>
-          
+
         </Box>
       </Modal>
     </div>
   );
 }
+
