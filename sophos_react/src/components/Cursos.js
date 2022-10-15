@@ -4,12 +4,14 @@ import constants from '../Constants'
 import TablaCursos from './TablaCursos'
 import { Button } from '@mui/material'
 import ModalDetCurso from './ModalDetCurso'
+import ModalCrearCurso from './ModalCrearCurso'
 
 const Cursos = () => {
 
   const [cursos_lista, setLista] = useState([])
   const [openModal, setOpenModal] = useState(false)
   const [curso_modal, setCursoModal] = useState(null)
+  const [openModalCrear, setOpenModalCrear] = useState(false)
 
   useEffect(()=>{
     getData()
@@ -43,9 +45,10 @@ const Cursos = () => {
   return (
     <div>
       <h2>Cursos</h2>
-      <Button variant="contained">Crear Curso</Button>
+      <Button variant="contained" onClick={()=>setOpenModalCrear(true)}>Crear Curso</Button>
       <TablaCursos data={cursos_lista} showModal={showModal}/>
       {curso_modal==undefined ? <></> : <ModalDetCurso open={openModal} showModal={showModal} curso={curso_modal}/>}
+      <ModalCrearCurso open={openModalCrear} setOpenModalCrearCurso={setOpenModalCrear}/>
     </div>
   );
 
