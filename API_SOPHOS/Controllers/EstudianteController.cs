@@ -1,5 +1,6 @@
 using API_SOPHOS.Data;
 using API_SOPHOS.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_SOPHOS.Controllers
@@ -9,9 +10,11 @@ namespace API_SOPHOS.Controllers
     public class EstudianteController : ControllerBase
     {
 
+        [EnableCors("AllowAllHeaders")]
         [HttpPost]
-        public string Post([FromBody] Estudiante estudiante)
+        public bool Post([FromBody] Estudiante estudiante)
         {
+            Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
             return EstudianteData.Crear(estudiante);
         }
 

@@ -65,6 +65,28 @@ export default function ModalCrearEstudiante({ open, setOpenModalCrear }) {
     
   }*/
 
+  const enviarCrearEstudiante = async () => {
+    if (nombre.length > 0 && facultad.length > 0 && semestre.length > 0) {
+      const estudiante = {
+        nombre: nombre,
+        facultad: facultad,
+        semestre: parseInt(semestre)
+      }
+      console.log("objecto");
+      console.log(estudiante);
+      try {
+        const res = await axios.post(
+          constants.api_Estudiante_CrearEstudiante,
+          estudiante
+        )
+        console.log(res.data);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+  }
+
   return (
     <div>
       <Modal
@@ -80,11 +102,21 @@ export default function ModalCrearEstudiante({ open, setOpenModalCrear }) {
             </Typography>
             <TextField fullWidth label="Nombre" id="nombre"
               value={nombre} onChange={(e) => setNombre(e.target.value)} />
-            <TextField fullWidth label="Facultad" id="facultad" />
-            <TextField type="number" fullWidth label="Semestre" id="semestre" />
+            <TextField fullWidth label="Facultad" id="facultad"
+              value={facultad} onChange={(e) => setFacultad(e.target.value)} />
+            <TextField type="number" fullWidth label="Semestre" id="semestre"
+              value={semestre} onChange={(e) => setSemestre(e.target.value)} />
             <Stack direction="row" spacing={2}>
-              <Button variant="contained" onClick={() => console.log(nombre)}>Agregar Estudiante</Button>
-              <Button color="error" variant="contained" onClick={() => console.log(nombre)}>Cancelar</Button>
+              <Button variant="contained" onClick={() => enviarCrearEstudiante()}>Agregar Estudiante</Button>
+              <Button color="error" variant="contained"
+                onClick={() => {
+                  setOpenModalCrear(false)
+                  setNombre("")
+                  setFacultad("")
+                  setSemestre(0)
+                }
+                }
+              >Cancelar</Button>
             </Stack>
           </Stack>
 

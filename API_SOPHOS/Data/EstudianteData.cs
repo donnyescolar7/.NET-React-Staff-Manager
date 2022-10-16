@@ -6,7 +6,7 @@ namespace API_SOPHOS.Data
 {
     public class EstudianteData
     {
-        public static string Crear(Estudiante estudiante)
+        public static bool Crear(Estudiante estudiante)
         {
             using (SqlConnection conexion = new SqlConnection(Conexion.rutaConexion)){
                 SqlCommand cmd  =new SqlCommand("estudiante_crear", conexion);
@@ -15,16 +15,15 @@ namespace API_SOPHOS.Data
                 cmd.Parameters.AddWithValue("@nombre", estudiante.nombre);
                 cmd.Parameters.AddWithValue("@facultad", estudiante.facultad);
                 cmd.Parameters.AddWithValue("@semestre", estudiante.semestre);
-                cmd.Parameters.AddWithValue("@cant_creditos", estudiante.cant_creditos);
 
                 try 
                 { 
                     conexion.Open();
                     cmd.ExecuteNonQuery();
-                    return "true";
+                    return true;
                 }catch(Exception e)
                 {
-                    return e.Message;
+                    return false;
                 }
 
             }
