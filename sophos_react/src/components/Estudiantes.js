@@ -46,7 +46,7 @@ const Estudiantes = () => {
       <Button variant="contained" onClick={()=>setOpenModalCrear(true)}>Agregar Estudiante</Button>
       <TablaEstudiantes data={cursos_lista} showModal={showModal}/>
       <ModalDetEstudiante open={openModal} showModal={showModal} cursos_lista={lista_modal}/>
-      <ModalCrearEstudiante open={openModalCrear} setOpenModalCrear={setOpenModalCrear}/>
+      <ModalCrearEstudiante open={openModalCrear} setOpenModalCrear={setOpenModalCrear} getData={getData}/>
     </div>
   );
 

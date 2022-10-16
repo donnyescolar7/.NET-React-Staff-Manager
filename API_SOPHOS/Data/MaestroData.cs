@@ -6,7 +6,7 @@ namespace API_SOPHOS.Data
 {
     public class MaestroData
     {
-        public static string Crear(Maestro maestro)
+        public static bool Crear(Maestro maestro)
         {
             using (SqlConnection conexion = new SqlConnection(Conexion.rutaConexion)){
                 SqlCommand cmd  =new SqlCommand("maestro_crear", conexion);
@@ -20,10 +20,10 @@ namespace API_SOPHOS.Data
                 { 
                     conexion.Open();
                     cmd.ExecuteNonQuery();
-                    return "true";
+                    return true;
                 }catch(Exception e)
                 {
-                    return e.Message;
+                    return false;
                 }
 
             }

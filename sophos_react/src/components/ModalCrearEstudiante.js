@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import TablaEstudiantesModal from './TablaEstudiantesModal';
 import axios from 'axios'
 import constants from '../Constants'
 import TextField from '@mui/material/TextField';
@@ -20,7 +19,7 @@ const style = {
   p: 4,
 };
 
-export default function ModalCrearEstudiante({ open, setOpenModalCrear }) {
+export default function ModalCrearEstudiante({ open, setOpenModalCrear, getData }) {
 
   const [nombre, setNombre] = useState("");
   const [facultad, setFacultad] = useState("");
@@ -79,7 +78,16 @@ export default function ModalCrearEstudiante({ open, setOpenModalCrear }) {
           constants.api_Estudiante_CrearEstudiante,
           estudiante
         )
-        console.log(res.data);
+        console.log(res.data)
+        if (res.data === true) {
+          setOpenModalCrear(false)
+          setNombre("")
+          setFacultad("")
+          setSemestre(0)
+          getData()
+        }else{
+          console.log("Error al subir")
+        }
       } catch (error) {
         console.log(error)
       }

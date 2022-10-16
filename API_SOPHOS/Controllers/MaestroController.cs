@@ -10,8 +10,9 @@ namespace API_SOPHOS.Controllers
     public class MaestroController : ControllerBase
     {
 
+        [EnableCors("AllowAllHeaders")]
         [HttpPost]
-        public string Post([FromBody] Maestro maestro)
+        public bool Post([FromBody] Maestro maestro)
         {
             return MaestroData.Crear(maestro);
         }

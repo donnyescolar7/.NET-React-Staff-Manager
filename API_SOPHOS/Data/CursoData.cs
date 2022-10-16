@@ -6,7 +6,7 @@ namespace API_SOPHOS.Data
 {
     public class CursoData
     {
-        public static string Crear(Curso curso)
+        public static bool Crear(Curso curso)
         {
             using (SqlConnection conexion = new SqlConnection(Conexion.rutaConexion)){
                 SqlCommand cmd  =new SqlCommand("curso_crear", conexion);
@@ -22,10 +22,10 @@ namespace API_SOPHOS.Data
                 { 
                     conexion.Open();
                     cmd.ExecuteNonQuery();
-                    return "true";
+                    return true;
                 }catch(Exception e)
                 {
-                    return e.Message;
+                    return false;
                 }
 
             }

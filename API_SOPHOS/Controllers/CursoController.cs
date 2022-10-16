@@ -11,7 +11,7 @@ namespace API_SOPHOS.Controllers
     {
 
         [HttpPost]
-        public string Post([FromBody] Curso curso)
+        public bool Post([FromBody] Curso curso)
         {
             return CursoData.Crear(curso);
         }
