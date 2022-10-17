@@ -18,6 +18,7 @@ namespace API_SOPHOS.Controllers
             return EstudianteData.Crear(estudiante);
         }
 
+        [EnableCors("AllowAllHeaders")]
         [HttpPut]
         public string Put([FromBody] Estudiante estudiante)
         {

@@ -40,7 +40,6 @@ namespace API_SOPHOS.Data
                 cmd.Parameters.AddWithValue("@nombre", estudiante.nombre);
                 cmd.Parameters.AddWithValue("@facultad", estudiante.facultad);
                 cmd.Parameters.AddWithValue("@semestre", estudiante.semestre);
-                cmd.Parameters.AddWithValue("@cant_creditos", estudiante.cant_creditos);
 
                 try
                 {

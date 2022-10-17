@@ -7,9 +7,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { IconButton } from '@mui/material';
-import { FormatListBulleted } from '@mui/icons-material';
+import { Edit, FormatListBulleted } from '@mui/icons-material';
 
-export default function TablaEstudiantes({ data, showModal }) {
+export default function TablaEstudiantes({ data, showModal, showModalActualizar }) {
 
   return (
     <TableContainer component={Paper}>
@@ -22,6 +22,7 @@ export default function TablaEstudiantes({ data, showModal }) {
             <TableCell align="center"><strong>Semestre</strong></TableCell>
             <TableCell align="center"><strong>Cant. Creditos</strong></TableCell>
             <TableCell align="center"><strong>Cursos</strong></TableCell>
+            <TableCell align="center"><strong>Editar</strong></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -39,8 +40,16 @@ export default function TablaEstudiantes({ data, showModal }) {
               <TableCell align="center">{estudiante.cant_creditos}</TableCell>
               <TableCell align="center">
                 <IconButton color="primary" aria-label="upload picture" component="label"
-                onClick={() => showModal(true, estudiante.idestudiante)}>
-                  <FormatListBulleted/>
+                  onClick={() => showModal(true, estudiante.idestudiante)}>
+                  <FormatListBulleted />
+                </IconButton>
+              </TableCell>
+              <TableCell align="center">
+                <IconButton color="primary" aria-label="upload picture" component="label"
+                  onClick={() => {
+                    showModalActualizar(estudiante)
+                  }}>
+                  <Edit />
                 </IconButton>
               </TableCell>
             </TableRow>
