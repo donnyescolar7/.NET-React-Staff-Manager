@@ -17,8 +17,9 @@ namespace API_SOPHOS.Controllers
             return MaestroData.Crear(maestro);
         }
 
+        [EnableCors("AllowAllHeaders")]
         [HttpPut]
-        public string Put([FromBody] Maestro maestro)
+        public bool Put([FromBody] Maestro maestro)
         {
             return MaestroData.Modificar(maestro);
         }

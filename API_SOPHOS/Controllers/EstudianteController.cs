@@ -20,7 +20,7 @@ namespace API_SOPHOS.Controllers
 
         [EnableCors("AllowAllHeaders")]
         [HttpPut]
-        public string Put([FromBody] Estudiante estudiante)
+        public bool Put([FromBody] Estudiante estudiante)
         {
             return EstudianteData.Modificar(estudiante);
         }

@@ -7,9 +7,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { IconButton } from '@mui/material';
-import { FormatListBulleted } from '@mui/icons-material';
+import { Edit, FormatListBulleted } from '@mui/icons-material';
 
-export default function TablaMaestros({ data, showModal }) {
+export default function TablaMaestros({ data, showModal, showModalActualizar }) {
 
   return (
     <TableContainer component={Paper}>
@@ -21,6 +21,7 @@ export default function TablaMaestros({ data, showModal }) {
             <TableCell align="center"><strong>Titulo</strong></TableCell>
             <TableCell align="center"><strong>Experiencia</strong></TableCell>
             <TableCell align="center"><strong>Cursos</strong></TableCell>
+            <TableCell align="center"><strong>Editar</strong></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -39,6 +40,14 @@ export default function TablaMaestros({ data, showModal }) {
                 <IconButton color="primary" aria-label="upload picture" component="label"
                 onClick={() => showModal(true, maestro.idmaestro)}>
                   <FormatListBulleted/>
+                </IconButton>
+              </TableCell>
+              <TableCell align="center">
+                <IconButton color="primary" aria-label="upload picture" component="label"
+                  onClick={() => {
+                    showModalActualizar(maestro)
+                  }}>
+                  <Edit />
                 </IconButton>
               </TableCell>
             </TableRow>

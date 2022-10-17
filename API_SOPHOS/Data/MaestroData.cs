@@ -29,7 +29,7 @@ namespace API_SOPHOS.Data
             }
         }
 
-        public static string Modificar(Maestro maestro)
+        public static bool Modificar(Maestro maestro)
         {
             using (SqlConnection conexion = new SqlConnection(Conexion.rutaConexion))
             {
@@ -45,11 +45,11 @@ namespace API_SOPHOS.Data
                 {
                     conexion.Open();
                     cmd.ExecuteNonQuery();
-                    return "true";
+                    return true;
                 }
                 catch (Exception e)
                 {
-                    return e.Message;
+                    return false;
                 }
 
             }

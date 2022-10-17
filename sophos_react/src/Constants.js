@@ -10,6 +10,7 @@ const constants = {
     api_Estudiante_CrearEstudiante: "https://localhost:44340/estudiante/",
     api_Estudiante_ActualizarEstudiante: "https://localhost:44340/estudiante/",
     api_Maestro_CrearMaestro: "https://localhost:44340/maestro/",
+    api_Maestro_ActualizarMaestro: "https://localhost:44340/maestro/",
 }
 
 export default constants
