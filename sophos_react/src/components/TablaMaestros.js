@@ -7,9 +7,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { IconButton } from '@mui/material';
-import { Edit, FormatListBulleted } from '@mui/icons-material';
+import { Delete, Edit, FormatListBulleted } from '@mui/icons-material';
 
-export default function TablaMaestros({ data, showModal, showModalActualizar }) {
+export default function TablaMaestros({ data, showModal, showModalActualizar, deleteItem }) {
 
   return (
     <TableContainer component={Paper}>
@@ -22,6 +22,7 @@ export default function TablaMaestros({ data, showModal, showModalActualizar }) 
             <TableCell align="center"><strong>Experiencia</strong></TableCell>
             <TableCell align="center"><strong>Cursos</strong></TableCell>
             <TableCell align="center"><strong>Editar</strong></TableCell>
+            <TableCell align="center"><strong>Eliminar</strong></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -48,6 +49,12 @@ export default function TablaMaestros({ data, showModal, showModalActualizar }) 
                     showModalActualizar(maestro)
                   }}>
                   <Edit />
+                </IconButton>
+              </TableCell>
+              <TableCell align="center">
+                <IconButton color="primary" aria-label="upload picture" component="label"
+                onClick={() => deleteItem(maestro)}>
+                  <Delete/>
                 </IconButton>
               </TableCell>
             </TableRow>

@@ -397,6 +397,10 @@ create procedure maestro_eliminar(
 as
 begin
 
+UPDATE curso
+SET IdMaestro = 0
+WHERE IdMaestro = @idmaestro;
+
 delete from maestro where IdMaestro = @idmaestro
 
 end
