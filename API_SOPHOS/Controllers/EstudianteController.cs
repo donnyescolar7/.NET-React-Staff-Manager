@@ -14,7 +14,7 @@ namespace API_SOPHOS.Controllers
         [HttpPost]
         public bool Post([FromBody] Estudiante estudiante)
         {
-            Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
+            //Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
             return EstudianteData.Crear(estudiante);
         }
 
@@ -31,10 +31,10 @@ namespace API_SOPHOS.Controllers
             return EstudianteData.Obtener(id);
         }
 
+        [EnableCors("AllowAllHeaders")]
         [HttpGet]
         public List<Estudiante> Get()
         {
-            Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
             return EstudianteData.Listar();
         }
 
@@ -45,10 +45,10 @@ namespace API_SOPHOS.Controllers
             return EstudianteData.Eliminar(id);
         }
 
+        [EnableCors("AllowAllHeaders")]
         [HttpGet("listarporcurso/{id:int}")]
         public List<Estudiante> GetListarPorCurso(int id)
         {
-            Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
             return EstudianteData.ListarPorCurso(id);
         }
 

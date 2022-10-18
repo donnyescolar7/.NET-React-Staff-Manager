@@ -27,11 +27,11 @@ namespace API_SOPHOS.Controllers
         {
             return CursoData.Obtener(id);
         }
-        
+
+        [EnableCors("AllowAllHeaders")]
         [HttpGet]
         public List<Curso> Get()
         {
-            Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
             return CursoData.Listar();
         }
 
@@ -49,31 +49,31 @@ namespace API_SOPHOS.Controllers
             return CursoData.Eliminar(id);
         }
 
+        [EnableCors("AllowAllHeaders")]
         [HttpGet("listarporestudiante/{id:int}")]
         public List<Curso> GetListarPorEstudiante(int id)
         {
-            Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
             return CursoData.ListarPorEstudiante(id);
         }
 
+        [EnableCors("AllowAllHeaders")]
         [HttpGet("listarpormaestro/{id:int}")]
         public List<Curso> GetListarPorMaestro(int id)
         {
-            Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
             return CursoData.ListarPorMaestro(id);
         }
 
+        [EnableCors("AllowAllHeaders")]
         [HttpPost("eliminar_r_curso_estudiante/{idcurso:int}/{idestudiante:int}")]
         public bool eliminar_r_curso_estudiante(int idcurso, int idestudiante)
         {
-            Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
             return CursoData.EliminarRCursoEstudiante(idcurso, idestudiante);
         }
 
+        [EnableCors("AllowAllHeaders")]
         [HttpPost("agregar_r_curso_estudiante/{idcurso:int}/{idestudiante:int}")]
         public bool agregar_r_curso_estudiante(int idcurso, int idestudiante)
         {
-            Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
             return CursoData.AgregarRCursoEstudiante(idcurso, idestudiante);
         }
 
