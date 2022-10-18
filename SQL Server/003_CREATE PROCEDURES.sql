@@ -111,6 +111,7 @@ as
 begin
 
 delete from curso where IdCurso = @idcurso
+delete from R_CURSO_ESTUDIANTE where IdCurso = @idcurso
 
 end
 

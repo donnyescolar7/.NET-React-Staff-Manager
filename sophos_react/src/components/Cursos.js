@@ -42,11 +42,22 @@ const Cursos = () => {
     setCursoModal(curso)
   }
 
+  const deleteItem = async(curso) => {
+    console.log(curso)
+    try {
+      const res = await axios.delete(constants.api_Curso_Eliminar+curso.idcurso)
+      console.log(res.data);
+      getData()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div>
       <h2>Cursos</h2>
       <Button variant="contained" onClick={()=>setOpenModalCrear(true)}>Crear Curso</Button>
-      <TablaCursos data={cursos_lista} showModal={showModal}/>
+      <TablaCursos data={cursos_lista} showModal={showModal} deleteItem={deleteItem}/>
       {curso_modal==undefined ? <></> : <ModalDetCurso open={openModal} showModal={showModal} curso={curso_modal}/>}
       <ModalCrearCurso open={openModalCrear} setOpenModalCrearCurso={setOpenModalCrear}/>
     </div>

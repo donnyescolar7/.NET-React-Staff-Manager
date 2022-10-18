@@ -156,6 +156,8 @@ namespace API_SOPHOS.Data
                 }
                 catch (Exception ex)
                 {
+                    System.Diagnostics.Debug.WriteLine("This is a log");
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
                     return false;
                 }
             }
