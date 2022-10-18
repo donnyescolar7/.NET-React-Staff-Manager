@@ -1,5 +1,6 @@
 const constants = {
     api_curso: "https://localhost:44340/curso",
+    api_curso_solo_disponibles: "https://localhost:44340/curso/solo_disponibles",
     api_estudiante: "https://localhost:44340/estudiante",
     api_cursos_por_estudiante: "https://localhost:44340/curso/listarporestudiante/",
     api_estudiantes_por_curso: "https://localhost:44340/estudiante/listarporcurso/",

@@ -79,6 +79,26 @@ end
 
 go
 
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'curso_listar_solo_disponibles')
+DROP PROCEDURE curso_listar_solo_disponibles
+
+go
+
+create procedure curso_listar_solo_disponibles
+as
+begin
+
+SELECT *
+FROM
+(SELECT *,
+(Curso.Cupos - (SELECT COUNT(*) FROM R_CURSO_ESTUDIANTE WHERE R_CURSO_ESTUDIANTE.IdCurso = CURSO.IdCurso)) AS CuposDisponibles
+FROM CURSO) AS CD
+WHERE CuposDisponibles > 0
+
+end
+
+go
+
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'curso_obtener')
 DROP PROCEDURE curso_obtener
 

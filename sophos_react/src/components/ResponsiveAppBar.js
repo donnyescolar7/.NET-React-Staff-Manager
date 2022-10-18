@@ -124,7 +124,7 @@ const ResponsiveAppBar = () => {
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-              Home
+              Inicio
             </Button>
             <Button
               component={Link} to="/cursos"

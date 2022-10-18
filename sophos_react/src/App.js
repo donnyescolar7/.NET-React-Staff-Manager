@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-import Home from "./components/Home";
+import Inicio from "./components/Home";
 import Cursos from "./components/Cursos";
 import ResponsiveAppBar from "./components/ResponsiveAppBar";
 import Estudiantes from "./components/Estudiantes";
@@ -13,7 +13,7 @@ export default function App() {
       <>
         <ResponsiveAppBar/>
         <Routes>
-          <Route path="/"element={<Home />} />
+          <Route path="/"element={<Inicio />} />
           <Route path="/cursos" element={<Cursos/>} />
           <Route path="/estudiantes" element={<Estudiantes/>} />
           <Route path="/maestros" element={<Maestros/>} />

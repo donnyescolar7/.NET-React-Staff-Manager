@@ -21,6 +21,7 @@ export default function TablaCursos({ data, showModal, deleteItem }) {
             <TableCell align="center"><strong>Créditos</strong></TableCell>
             <TableCell align="center"><strong>Id Maestro</strong></TableCell>
             <TableCell align="center"><strong>Prerrequisito</strong></TableCell>
+            <TableCell align="center"><strong>Cupos Disp.</strong></TableCell>
             <TableCell align="center"><strong>Detalles</strong></TableCell>
             <TableCell align="center"><strong>Eliminar</strong></TableCell>
           </TableRow>
@@ -38,6 +39,7 @@ export default function TablaCursos({ data, showModal, deleteItem }) {
               <TableCell align="center">{curso.numero_creditos}</TableCell>
               <TableCell align="center">{curso.idmaestro}</TableCell>
               <TableCell align="center">{curso.nombre_prerrequisito}</TableCell>
+              <TableCell align="center">{curso.cupos_disponibles}</TableCell>
               <TableCell align="center">
                 <IconButton color="primary" aria-label="upload picture" component="label"
                 onClick={() => showModal(true, curso)}>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import constants from '../Constants'
 import TablaCursos from './TablaCursos'
-import { Button } from '@mui/material'
+import { Button, Checkbox, FormControlLabel, FormGroup } from '@mui/material'
 import ModalDetCurso from './ModalDetCurso'
 import ModalCrearCurso from './ModalCrearCurso'
 
@@ -13,13 +13,18 @@ const Cursos = () => {
   const [curso_modal, setCursoModal] = useState(null)
   const [openModalCrear, setOpenModalCrear] = useState(false)
 
-  useEffect(()=>{
-    getData()
-  },[])
+  const [checked, setChecked] = React.useState(false);
 
-  const getData = async () => {
+  useEffect(() => {
+    getData()
+  }, [])
+
+  const getData = async (filtered) => {
     try {
-      const res = await axios.get(constants.api_curso)
+      const res = filtered ?  
+      await axios.get(constants.api_curso_solo_disponibles)
+      :
+      await axios.get(constants.api_curso)
       console.log(res);
       setLista(res.data)
     } catch (error) {
@@ -27,7 +32,7 @@ const Cursos = () => {
     }
   }
 
-  const showModal = async(open, curso) => {
+  const showModal = async (open, curso) => {
     /*console.log(curso)
     if(open){
       try {
@@ -42,10 +47,10 @@ const Cursos = () => {
     setCursoModal(curso)
   }
 
-  const deleteItem = async(curso) => {
+  const deleteItem = async (curso) => {
     console.log(curso)
     try {
-      const res = await axios.delete(constants.api_Curso_Eliminar+curso.idcurso)
+      const res = await axios.delete(constants.api_Curso_Eliminar + curso.idcurso)
       console.log(res.data);
       getData()
     } catch (error) {
@@ -53,13 +58,28 @@ const Cursos = () => {
     }
   }
 
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+    getData(event.target.checked)
+  };
+
   return (
     <div>
       <h2>Cursos</h2>
-      <Button variant="contained" onClick={()=>setOpenModalCrear(true)}>Crear Curso</Button>
-      <TablaCursos data={cursos_lista} showModal={showModal} deleteItem={deleteItem}/>
-      {curso_modal==undefined ? <></> : <ModalDetCurso open={openModal} showModal={showModal} curso={curso_modal}/>}
-      <ModalCrearCurso open={openModalCrear} setOpenModalCrearCurso={setOpenModalCrear}/>
+      <Button variant="contained" onClick={() => setOpenModalCrear(true)}>Crear Curso</Button>
+      <FormGroup>
+        <FormControlLabel control={
+          <Checkbox
+            label="Locura"
+            checked={checked}
+            onChange={handleChange}
+            inputProps={{ 'aria-label': 'controlled' }}
+          />
+        } label="Solo cursos con cupos disponibles"/>
+      </FormGroup>
+      <TablaCursos data={cursos_lista} showModal={showModal} deleteItem={deleteItem} />
+      {curso_modal == undefined ? <></> : <ModalDetCurso open={openModal} showModal={showModal} curso={curso_modal} />}
+      <ModalCrearCurso open={openModalCrear} setOpenModalCrearCurso={setOpenModalCrear} />
     </div>
   );
 

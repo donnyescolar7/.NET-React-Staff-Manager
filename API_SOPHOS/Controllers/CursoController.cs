@@ -36,6 +36,13 @@ namespace API_SOPHOS.Controllers
         }
 
         [EnableCors("AllowAllHeaders")]
+        [HttpGet("solo_disponibles")]
+        public List<Curso> GetSoloDisponibles()
+        {
+            return CursoData.ListarSoloDisponibles();
+        }
+
+        [EnableCors("AllowAllHeaders")]
         [HttpDelete("{id:int}")]
         public bool Delete(int id)
         {
