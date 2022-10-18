@@ -56,6 +56,17 @@ const Estudiantes = () => {
     setOpenModalEditar(true)
   }
 
+  const deleteItem = async(estudiante) => {
+    console.log(estudiante)
+    try {
+      const res = await axios.delete(constants.api_Estudiante_Eliminar+estudiante.idestudiante)
+      console.log(res.data);
+      getData()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div>
       <h2>Estudiantes</h2>
@@ -63,6 +74,7 @@ const Estudiantes = () => {
       <TablaEstudiantes
         data={cursos_lista} showModal={showModal}
         showModalActualizar={showModalActualizar}
+        deleteItem={deleteItem}
       />
       <ModalDetEstudiante open={openModal} showModal={showModal} cursos_lista={lista_modal} />
       <ModalCrearEstudiante open={openModalCrear} setOpenModalCrear={setOpenModalCrear} getData={getData} />

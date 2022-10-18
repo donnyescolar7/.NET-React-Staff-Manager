@@ -257,6 +257,7 @@ create procedure estudiante_eliminar(
 as
 begin
 
+delete from R_CURSO_ESTUDIANTE where IdEstudiante = @idestudiante
 delete from estudiante where IdEstudiante = @idestudiante
 
 end

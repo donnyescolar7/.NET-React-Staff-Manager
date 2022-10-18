@@ -38,6 +38,7 @@ namespace API_SOPHOS.Controllers
             return EstudianteData.Listar();
         }
 
+        [EnableCors("AllowAllHeaders")]
         [HttpDelete("{id:int}")]
         public bool Delete(int id)
         {
