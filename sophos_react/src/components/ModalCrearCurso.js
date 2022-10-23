@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import TablaEstudiantesModal from './TablaEstudiantesModal';
 import axios from 'axios'
 import constants from '../Constants'
 import TextField from '@mui/material/TextField';
+import { Stack } from '@mui/system';
+import { Button } from '@mui/material';
 
 const style = {
   position: 'absolute',
@@ -18,62 +19,91 @@ const style = {
   p: 4,
 };
 
-export default function ModalCrearCurso({ open, setOpenModalCrearCurso }) {
+export default function ModalCrearMaestro({ open, setOpenModalCrear, getData }) {
 
-  /*const [estudiantes_lista, setLista] = useState([])
+  const [nombre, setNombre] = useState("");
+  const [creditos, setCreditos] = useState(0);
+  const [idMaestro, setIdMaestro] = useState(0);
+  const [prerrequisito, setPrerrequisito] = useState("");
+  const [cupos, setCupos] = useState(0);
 
-  useEffect(()=>{
-    loadData()
-  },[])
-
-  const loadData = async () => {
-    console.log(curso)
-    try {
-      const res = await axios.get(constants.api_estudiantes_por_curso + curso.idcurso)
-      console.log(res);
-      setLista(res.data)
-    } catch (error) {
-      console.log(error)
+  const enviarCrearCurso = async () => {
+    if (nombre.length > 0 && creditos.length > 0 && idMaestro.length > 0 
+      && prerrequisito.length > 0 && cupos.length > 0) {
+      const curso = {
+        nombre: nombre,
+        creditos: parseInt(creditos),
+        idmaestro: parseInt(idMaestro),
+        prerrequisito: prerrequisito,
+        cupos: parseInt(cupos),
+      }
+      console.log("objecto");
+      console.log(curso);
+      try {
+        const res = await axios.post(
+          constants.api_Maestro_CrearMaestro,
+          curso
+        )
+        console.log(res.data);
+        if (res.data === true) {
+          setOpenModalCrear(false)
+          setNombre("")
+          setCreditos(0)
+          setIdMaestro(0)
+          setPrerrequisito("")
+          setCupos(0)
+          getData()
+        }else{
+          console.log("Error al subir");
+        }
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
-
-  const actualizarLista = async (idesudiante, inscritoValue) => {
-    console.log(curso)
-    console.log("Idestudi"+idesudiante);
-    try {
-      const req = inscritoValue ? 
-      constants.api_Agregar_RCursoEstudiante + curso.idcurso+"/"+idesudiante 
-      :
-      constants.api_Eliminar_RCursoEstudiante + curso.idcurso+"/"+idesudiante
-
-      const res = await axios.post(req)
-      console.log(res.data);
-      if(res.data){
-        estudiantes_lista[estudiantes_lista.findIndex((e) => e.idestudiante === idesudiante)].esta_en_curso = inscritoValue
-        setLista([...estudiantes_lista])
-      }
-
-    } catch (error) {
-      console.log(error)
-    }
-    
-  }*/
 
   return (
     <div>
       <Modal
         open={open}
-        onClose={() => setOpenModalCrearCurso(false)}
+        onClose={() => setOpenModalCrear(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography variant="h6" component="h2">
-            Crear Curso
-          </Typography>
-          <TextField fullWidth label="fullWidth" id="fullWidth" />
+          <Stack direction="column" spacing={2}>
+            <Typography variant="h6" component="h2">
+              Crear Curso
+            </Typography>
+            <TextField fullWidth label="Nombre" id="nombre"
+              value={nombre} onChange={(e) => setNombre(e.target.value)} />
+            <TextField type="number" fullWidth label="Créditos" id="creditos"
+              value={creditos} onChange={(e) => setCreditos(e.target.value)} />
+            <TextField type="number" fullWidth label="Id Maestro" id="idmaestro"
+              value={idMaestro} onChange={(e) => setIdMaestro(e.target.value)} />
+              <TextField fullWidth label="Prerrequisito" id="prerrequisito"
+              value={prerrequisito} onChange={(e) => setPrerrequisito(e.target.value)} />
+              <TextField type="number" fullWidth label="Cupos" id="cupos"
+              value={cupos} onChange={(e) => setCupos(e.target.value)} />
+            <Stack direction="row" spacing={2}>
+              <Button variant="contained" onClick={() => enviarCrearCurso()}>Agregar Curso</Button>
+              <Button color="error" variant="contained"
+                onClick={() => {
+                  setOpenModalCrear(false)
+                  setNombre("")
+                  setCreditos(0)
+                  setIdMaestro(0)
+                  setPrerrequisito("")
+                  setCupos(0)
+                }
+                }
+              >Cancelar</Button>
+            </Stack>
+          </Stack>
+
         </Box>
       </Modal>
     </div>
   );
 }
+

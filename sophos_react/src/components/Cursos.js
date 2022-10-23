@@ -79,7 +79,7 @@ const Cursos = () => {
       </FormGroup>
       <TablaCursos data={cursos_lista} showModal={showModal} deleteItem={deleteItem} />
       {curso_modal == undefined ? <></> : <ModalDetCurso open={openModal} showModal={showModal} curso={curso_modal} />}
-      <ModalCrearCurso open={openModalCrear} setOpenModalCrearCurso={setOpenModalCrear} />
+      <ModalCrearCurso open={openModalCrear} setOpenModalCrear={setOpenModalCrear} />
     </div>
   );
 
