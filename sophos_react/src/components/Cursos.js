@@ -13,15 +13,18 @@ const Cursos = () => {
   const [curso_modal, setCursoModal] = useState(null)
   const [openModalCrear, setOpenModalCrear] = useState(false)
 
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     getData()
   }, [])
 
-  const getData = async (filtered) => {
+  const getData = async (filtered, nombre) => {
     try {
-      const res = filtered ?  
+      const res = nombre != undefined ? 
+      await axios.get(constants.api_curso_por_nombre + "/"+nombre)
+      :
+      filtered ?  
       await axios.get(constants.api_curso_solo_disponibles)
       :
       await axios.get(constants.api_curso)
@@ -67,6 +70,7 @@ const Cursos = () => {
     <div>
       <h2>Cursos</h2>
       <Button variant="contained" onClick={() => setOpenModalCrear(true)}>Crear Curso</Button>
+      <Button variant="contained" onClick={() => getData(false, "filo")}>Buscar</Button>
       <FormGroup>
         <FormControlLabel control={
           <Checkbox
