@@ -43,6 +43,13 @@ namespace API_SOPHOS.Controllers
         }
 
         [EnableCors("AllowAllHeaders")]
+        [HttpGet("por_nombre/{nombre}")]
+        public List<Curso> GetPorNombre(string nombre)
+        {
+            return CursoData.ObtenerPorNombre(nombre);
+        }
+
+        [EnableCors("AllowAllHeaders")]
         [HttpDelete("{id:int}")]
         public bool Delete(int id)
         {
