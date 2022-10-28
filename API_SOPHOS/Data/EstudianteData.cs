@@ -132,6 +132,46 @@ namespace API_SOPHOS.Data
             }
         }
 
+        public static List<Estudiante> ListarPorNombre(string nombre)
+        {
+            List<Estudiante> ListaEstudiante = new List<Estudiante>();
+            using (SqlConnection oConexion = new SqlConnection(Conexion.rutaConexion))
+            {
+                SqlCommand cmd = new SqlCommand("estudiante_listar_por_nombre", oConexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@nombre", nombre);
+
+                try
+                {
+                    oConexion.Open();
+                    cmd.ExecuteNonQuery();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+
+                        while (dr.Read())
+                        {
+                            ListaEstudiante.Add(new Estudiante()
+                            {
+                                idestudiante = Convert.ToInt32(dr["IdEstudiante"]),
+                                nombre = dr["Nombre"].ToString(),
+                                facultad = dr["Facultad"].ToString(),
+                                semestre = Convert.ToInt32(dr["semestre"]),
+                                cant_creditos = Convert.ToInt32(dr["CantidadCreditos"])
+                            });
+                        }
+
+                    }
+
+                    return ListaEstudiante;
+                }
+                catch (Exception ex)
+                {
+                    return ListaEstudiante;
+                }
+            }
+        }
+
         public static bool Eliminar(int id)
         {
             using (SqlConnection oConexion = new SqlConnection(Conexion.rutaConexion))

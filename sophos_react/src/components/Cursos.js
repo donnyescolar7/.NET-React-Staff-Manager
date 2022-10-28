@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import constants from '../Constants'
 import TablaCursos from './TablaCursos'
-import { Button, Checkbox, FormControlLabel, FormGroup } from '@mui/material'
+import { Box, Button, Checkbox, FormControlLabel, FormGroup, TextField } from '@mui/material'
 import ModalDetCurso from './ModalDetCurso'
 import ModalCrearCurso from './ModalCrearCurso'
 
@@ -13,6 +13,8 @@ const Cursos = () => {
   const [curso_modal, setCursoModal] = useState(null)
   const [openModalCrear, setOpenModalCrear] = useState(false)
 
+  const [nombre_buscar, setNombreBuscar] = useState("");
+
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
@@ -21,13 +23,13 @@ const Cursos = () => {
 
   const getData = async (filtered, nombre) => {
     try {
-      const res = nombre != undefined ? 
-      await axios.get(constants.api_curso_por_nombre + "/"+nombre)
-      :
-      filtered ?  
-      await axios.get(constants.api_curso_solo_disponibles)
-      :
-      await axios.get(constants.api_curso)
+      const res = nombre != undefined ?
+        await axios.get(constants.api_curso_por_nombre + "/" + nombre)
+        :
+        filtered ?
+          await axios.get(constants.api_curso_solo_disponibles)
+          :
+          await axios.get(constants.api_curso)
       console.log(res);
       setLista(res.data)
     } catch (error) {
@@ -68,9 +70,19 @@ const Cursos = () => {
 
   return (
     <div>
+      <Box sx={{ display: 'flex', flexDirection: 'column', p:2}}>
       <h2>Cursos</h2>
-      <Button variant="contained" onClick={() => setOpenModalCrear(true)}>Crear Curso</Button>
-      <Button variant="contained" onClick={() => getData(false, "filo")}>Buscar</Button>
+
+      <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+        <TextField
+          sx={{}}
+          label="Buscar" id="nombre_buscar"
+          value={nombre_buscar} onChange={(e) => setNombreBuscar(e.target.value)} />
+        <Button sx={{ m: 1 }} variant="contained" onClick={() => getData(false, nombre_buscar)}>Buscar</Button>
+        <Button sx={{ m: 1 }} variant="contained" onClick={() => setOpenModalCrear(true)}>Crear Curso</Button>
+      </Box>
+
+
       <FormGroup>
         <FormControlLabel control={
           <Checkbox
@@ -79,11 +91,12 @@ const Cursos = () => {
             onChange={handleChange}
             inputProps={{ 'aria-label': 'controlled' }}
           />
-        } label="Solo cursos con cupos disponibles"/>
+        } label="Solo cursos con cupos disponibles" />
       </FormGroup>
       <TablaCursos data={cursos_lista} showModal={showModal} deleteItem={deleteItem} />
       {curso_modal == undefined ? <></> : <ModalDetCurso open={openModal} showModal={showModal} curso={curso_modal} />}
       <ModalCrearCurso open={openModalCrear} setOpenModalCrear={setOpenModalCrear} />
+    </Box>
     </div>
   );
 

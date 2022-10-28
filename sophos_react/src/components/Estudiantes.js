@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import constants from '../Constants'
-import { Button } from '@mui/material'
+import { Box, Button, TextField } from '@mui/material'
 import TablaEstudiantes from './TablaEstudiantes'
 import ModalDetEstudiante from './ModalDetEstudiante'
 import ModalCrearEstudiante from './ModalCrearEstudiante'
@@ -21,13 +21,18 @@ const Estudiantes = () => {
   const [semestre_editar, setSemestreEditar] = useState(0)
   const [openModalEditar, setOpenModalEditar] = useState(false)
 
+  const [nombre_buscar, setNombreBuscar] = useState("");
+
   useEffect(() => {
     getData()
   }, [])
 
-  const getData = async () => {
+  const getData = async (nombre) => {
     try {
-      const res = await axios.get(constants.api_estudiante)
+      const res = nombre != undefined ?
+      await axios.get(constants.api_estudiante_por_nombre + "/" + nombre)
+      :
+      await axios.get(constants.api_estudiante)
       console.log(res);
       setLista(res.data)
     } catch (error) {
@@ -69,8 +74,16 @@ const Estudiantes = () => {
 
   return (
     <div>
+      <Box sx={{ display: 'flex', flexDirection: 'column', p:2}}>
       <h2>Estudiantes</h2>
-      <Button variant="contained" onClick={() => setOpenModalCrear(true)}>Agregar Estudiante</Button>
+      <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+      <TextField
+          sx={{}}
+          label="Buscar" id="nombre_buscar"
+          value={nombre_buscar} onChange={(e) => setNombreBuscar(e.target.value)} />
+        <Button sx={{ m: 1 }} variant="contained" onClick={() => getData(nombre_buscar)}>Buscar</Button>
+      <Button sx={{ m: 1 }} variant="contained" onClick={() => setOpenModalCrear(true)}>Agregar Estudiante</Button>
+      </Box>
       <TablaEstudiantes
         data={cursos_lista} showModal={showModal}
         showModalActualizar={showModalActualizar}
@@ -85,6 +98,7 @@ const Estudiantes = () => {
         facultad={facultad_editar} setFacultad={setFacultadEditar}
         semestre={semestre_editar} setSemestre={setSemestreEditar}
       />
+      </Box>
     </div>
   );
 

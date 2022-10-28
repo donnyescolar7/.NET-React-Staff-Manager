@@ -32,6 +32,13 @@ namespace API_SOPHOS.Controllers
         }
 
         [EnableCors("AllowAllHeaders")]
+        [HttpGet("por_nombre/{nombre}")]
+        public List<Estudiante> GetPorNombre(string nombre)
+        {
+            return EstudianteData.ListarPorNombre(nombre);
+        }
+
+        [EnableCors("AllowAllHeaders")]
         [HttpGet]
         public List<Estudiante> Get()
         {

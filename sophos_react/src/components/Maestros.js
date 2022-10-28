@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import constants from '../Constants'
-import { Button } from '@mui/material'
+import { Box, Button, TextField } from '@mui/material'
 import TablaMaestros from './TablaMaestros'
 import ModalDetEstudiante from './ModalDetEstudiante'
 import ModalCrearMaestro from './ModalCrearMaestro'
@@ -22,13 +22,18 @@ const Maestros = () => {
   const [experiencia_editar, setExperienciaEditar] = useState(0)
   const [openModalEditar, setOpenModalEditar] = useState(false)
 
+  const [nombre_buscar, setNombreBuscar] = useState("");
+
   useEffect(()=>{
     getData()
   },[])
 
-  const getData = async () => {
+  const getData = async (nombre) => {
     try {
-      const res = await axios.get(constants.api_maestros)
+      const res = nombre != undefined ?
+      await axios.get(constants.api_maestro_por_nombre + "/" + nombre)
+      :
+      await axios.get(constants.api_maestros)
       console.log(res);
       setLista(res.data)
     } catch (error) {
@@ -71,8 +76,16 @@ const Maestros = () => {
 
   return (
     <div>
+      <Box sx={{ display: 'flex', flexDirection: 'column', p:2}}>
       <h2>Maestros</h2>
-      <Button variant="contained" onClick={()=>setOpenModalCrear(true)}>Agregar Maestro</Button>
+      <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+      <TextField
+          sx={{}}
+          label="Buscar" id="nombre_buscar"
+          value={nombre_buscar} onChange={(e) => setNombreBuscar(e.target.value)} />
+        <Button sx={{ m: 1 }} variant="contained" onClick={() => getData(nombre_buscar)}>Buscar</Button>
+      <Button sx={{ m: 1 }} variant="contained" onClick={()=>setOpenModalCrear(true)}>Agregar Maestro</Button>
+      </Box>
       <TablaMaestros 
         data={maestros_lista} showModal={showModal}
         showModalActualizar={showModalActualizar}
@@ -87,6 +100,7 @@ const Maestros = () => {
         titulo={titulo_editar} setTitulo={setTituloEditar}
         experiencia={experiencia_editar} setExperiencia={setExperienciaEditar}
       />
+      </Box>
     </div>
   );
 

@@ -268,6 +268,30 @@ end
 
 go
 
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'estudiante_listar_por_nombre')
+DROP PROCEDURE estudiante_listar_por_nombre
+
+go
+
+create procedure estudiante_listar_por_nombre(@nombre varchar(60))
+as
+begin
+
+SELECT 
+   *,
+   (SELECT  ISNULL(SUM(CURSO_CRED.NumeroCreditos), 0)
+    FROM (SELECT R_CURSO_ESTUDIANTE.IdCurso, R_CURSO_ESTUDIANTE.IdEstudiante, CURSO.NumeroCreditos
+    FROM R_CURSO_ESTUDIANTE
+    JOIN CURSO ON CURSO.IdCurso = R_CURSO_ESTUDIANTE.IdCurso
+	)AS CURSO_CRED
+    WHERE CURSO_CRED.IdEstudiante = ESTUDIANTE.IdEstudiante) AS CantidadCreditos
+FROM ESTUDIANTE
+WHERE ESTUDIANTE.Nombre LIKE '%' + @nombre + '%'
+
+end
+
+go
+
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'estudiante_obtener')
 DROP PROCEDURE estudiante_obtener
 
@@ -403,6 +427,22 @@ as
 begin
 
 select * from maestro
+
+end
+
+go
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'maestro_listar_por_nombre')
+DROP PROCEDURE maestro_listar_por_nombre
+
+go
+
+create procedure maestro_listar_por_nombre(@nombre varchar(60))
+as
+begin
+
+select * from maestro
+WHERE maestro.Nombre LIKE '%' + @nombre + '%'
 
 end
 

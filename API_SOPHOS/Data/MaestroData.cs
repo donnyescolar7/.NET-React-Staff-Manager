@@ -93,6 +93,45 @@ namespace API_SOPHOS.Data
             }
         }
 
+        public static List<Maestro> ListarPorNombre(string nombre)
+        {
+            List<Maestro> ListaMaestro = new List<Maestro>();
+            using (SqlConnection oConexion = new SqlConnection(Conexion.rutaConexion))
+            {
+                SqlCommand cmd = new SqlCommand("maestro_listar_por_nombre", oConexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@nombre", nombre);
+
+                try
+                {
+                    oConexion.Open();
+                    cmd.ExecuteNonQuery();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+
+                        while (dr.Read())
+                        {
+                            ListaMaestro.Add(new Maestro()
+                            {
+                                idmaestro = Convert.ToInt32(dr["IdMaestro"]),
+                                nombre = dr["Nombre"].ToString(),
+                                titulo = dr["Titulo"].ToString(),
+                                experiencia = Convert.ToInt32(dr["Experiencia"])
+                            });
+                        }
+
+                    }
+
+                    return ListaMaestro;
+                }
+                catch (Exception ex)
+                {
+                    return ListaMaestro;
+                }
+            }
+        }
+
         public static Maestro Obtener(int idmaestro)
         {
             Maestro maestro = new Maestro();
