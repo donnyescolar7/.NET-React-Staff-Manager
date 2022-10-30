@@ -6,6 +6,9 @@ Pasos para Ejecutar aplicacion:
 1. Abrir y Ejecutar con Visual Studio IIExpress la solución en .Net Core. Esta se ejecuta en el puesto 44340
 2. Ejecutar comando 'npm start' en la carpeta del proyecto Frontend React
 
+Diagrama de Base de Datos:
+![diagrama_bd](https://user-images.githubusercontent.com/25647389/198904485-046e172a-7f5b-4740-9861-7a78937fe891.JPG)
+
 
 Descripción de los EndPoints:
 
