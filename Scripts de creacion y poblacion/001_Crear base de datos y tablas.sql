@@ -9,19 +9,6 @@ USE PYSOPHOS
 
 GO
 
-if not exists (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND TABLE_NAME = 'CURSO')
-create table CURSO(
-IdCurso int primary key identity(1,1),
-Nombre varchar(60),
-NombrePrerrequisito varchar(60),
-NumeroCreditos int,
-Cupos int,
-IdMaestro int,
-
-)
-
-GO
-
 if not exists (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND TABLE_NAME = 'ESTUDIANTE')
 create table ESTUDIANTE(
 IdEstudiante int primary key identity(1,1),
@@ -38,6 +25,21 @@ IdMaestro int primary key identity(1,1),
 Nombre varchar(60),
 Titulo varchar(60),
 Experiencia int,
+)
+
+GO
+
+if not exists (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND TABLE_NAME = 'CURSO')
+create table CURSO(
+IdCurso int primary key identity(1,1),
+Nombre varchar(60),
+NombrePrerrequisito varchar(60),
+NumeroCreditos int,
+Cupos int,
+IdMaestro int,
+
+CONSTRAINT FK_R_IDMAESTRO FOREIGN KEY (IdMaestro) REFERENCES MAESTRO(IdMaestro),
+
 )
 
 GO
