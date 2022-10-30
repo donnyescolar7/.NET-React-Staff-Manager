@@ -16,9 +16,9 @@ export default function TablaCursosModal({ data, showModal }) {
           <TableRow>
             <TableCell><strong>id</strong></TableCell>
             <TableCell><strong>Nombre</strong></TableCell>
-            <TableCell align="right"><strong>Créditos</strong></TableCell>
-            <TableCell align="right"><strong>Id Maestro</strong></TableCell>
-            <TableCell align="right"><strong>Prerrequisito</strong></TableCell>
+            <TableCell align="center"><strong>Créditos</strong></TableCell>
+            <TableCell align="center"><strong>Id Maestro</strong></TableCell>
+            <TableCell align="center"><strong>Prerrequisito</strong></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -31,9 +31,9 @@ export default function TablaCursosModal({ data, showModal }) {
               <TableCell component="th" scope="row">
                 {curso.nombre}
               </TableCell>
-              <TableCell align="right">{curso.numero_creditos}</TableCell>
-              <TableCell align="right">{curso.idmaestro}</TableCell>
-              <TableCell align="right">{curso.nombre_prerrequisito}</TableCell>
+              <TableCell align="center">{curso.numero_creditos}</TableCell>
+              <TableCell align="center">{curso.idmaestro}</TableCell>
+              <TableCell align="center">{curso.nombre_prerrequisito}</TableCell>
               
             </TableRow>
           ))}

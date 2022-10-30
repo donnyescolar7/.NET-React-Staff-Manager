@@ -11,14 +11,13 @@ const Inicio = () => {
   return (
     <div>
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', p: 2 }}>
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{}}>
           <CardActionArea component={Link} to="/cursos">
             <CardMedia
               component="img"
-              height="140"
-              width="100"
+              height="210"
               image={require("../images/cursos.jpg")}
-              alt="green iguana"
+              alt=""
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
@@ -27,14 +26,13 @@ const Inicio = () => {
             </CardContent>
           </CardActionArea>
         </Card>
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ }}>
           <CardActionArea component={Link} to="/estudiantes">
             <CardMedia
               component="img"
-              height="140"
-              width="100"
+              height="210"
               image={require("../images/estudiantes.jpg")}
-              alt="green iguana"
+              alt=""
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
@@ -43,14 +41,13 @@ const Inicio = () => {
             </CardContent>
           </CardActionArea>
         </Card>
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ }}>
           <CardActionArea component={Link} to="/maestros">
             <CardMedia
               component="img"
-              height="140"
-              width="100"
+              height="210"
               image={require("../images/maestros.jpg")}
-              alt="green iguana"
+              alt=""
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
