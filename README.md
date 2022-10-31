@@ -9,6 +9,9 @@ Pasos para Ejecutar aplicacion:
 Diagrama de Base de Datos:
 ![diagrama_bd](https://user-images.githubusercontent.com/25647389/198904485-046e172a-7f5b-4740-9861-7a78937fe891.JPG)
 
+Diagrama de Clases:
+![diagrama_clases](https://user-images.githubusercontent.com/25647389/199103135-a157c1f9-5bad-47bc-b779-77199de15592.JPG)
+
 
 Descripción de los EndPoints:
 
