@@ -1,4 +1,4 @@
-# Proyecto_Sophos
+# .NET-React Staff Manager
 
 
 Pasos para Ejecutar aplicacion:
